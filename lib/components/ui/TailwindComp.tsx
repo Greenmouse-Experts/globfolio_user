@@ -11,6 +11,12 @@ import {
   AccordionBody,
   Select,
   Option,
+  Timeline,
+  TimelineItem,
+  TimelineConnector,
+  TimelineIcon,
+  Typography,
+  TimelineHeader,
 } from '@material-tailwind/react';
 
 export {
@@ -25,4 +31,10 @@ export {
   AccordionHeader,
   Select,
   Option,
+  Timeline,
+  TimelineItem,
+  TimelineConnector,
+  TimelineIcon,
+  Typography,
+  TimelineHeader,
 };
