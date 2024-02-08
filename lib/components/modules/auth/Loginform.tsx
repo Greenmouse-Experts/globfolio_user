@@ -56,6 +56,7 @@ const LoginForm = () => {
           email_verify: data.data.email_verify,
           id: data.data.id,
           account: "",
+          username: data.data.userName
         });
         saveSub(data.data.subscription)
         router.push("/dashboard");

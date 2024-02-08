@@ -71,7 +71,7 @@ const SettingsPage = () => {
           </div>
           <div className="flex items-center gap-x-3">
             <div className="w-44">
-              <Button title={"Edit Profile"} />
+              <Button title={"Edit Profile"} onClick={() => ShowEdit(true)}/>
             </div>
             <div
               className="w-12 h-12 place-center rounded-lg bg-primary text-white cursor-pointer"
@@ -98,6 +98,12 @@ const SettingsPage = () => {
               </p>
               <p className="lg:text-xl syne">{user.name}</p>
             </div>
+            {/* <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
+              <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
+                User Name:
+              </p>
+              <p className="lg:text-xl syne">{user.username}</p>
+            </div> */}
             <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
               <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
                 Email:
@@ -149,7 +155,7 @@ const SettingsPage = () => {
         <ChangePassword close={() => ShowPassword(false)} />
       </Password>
       <Edit title="Edit Profile" size="lg" type="withCancel">
-        <EditProfile/>
+        <EditProfile close={() => ShowEdit(false)}/>
       </Edit>
     </>
   );

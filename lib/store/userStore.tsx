@@ -17,7 +17,8 @@ interface userProps{
     account: string;
     joined: string;
     email_verify: boolean;
-    gender: string
+    gender: string;
+    username: string;
 }
 const userInitState = {
     name: '',
@@ -30,7 +31,8 @@ const userInitState = {
     id: '',
     joined: '',
     email_verify: false,
-    gender: ''
+    gender: '',
+    username: ''
 }
 const useAuthStore = create<Props>()(
   persist(

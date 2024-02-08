@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -9,10 +9,15 @@ import TextInput, { InputType } from "../../ui/TextInput";
 import SelectInput from "../../ui/SelectInput";
 import { genderOption } from "@/lib/utils/hardData";
 import {countries} from 'country-data-list';
+import Button from "../../ui/Button";
+import { BarsSpinner } from "../../ui/Loaders/Spinners";
+import useAuth from "@/lib/hooks/authUser";
 
-const EditProfile = () => {
-    console.log(countries);
-    
+interface Props {
+    close: () => void
+}
+const EditProfile:FC<Props> = ({close}) => {
+    const {user, firstName, lastName} = useAuth()
   const [isBusy, setIsBusy] = useState(false);
   const {
     control,
@@ -22,12 +27,12 @@ const EditProfile = () => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      phone_no: "",
-      gender: "",
-      username: "",
-      country: "",
-      firstname: "",
-      lastname: "",
+      phone_no: user.phone || "",
+      gender: user.gender || "",
+    //   username: user.username || "",
+      country: user.country || "",
+      firstname: firstName ||  "",
+      lastname: lastName || "",
     },
   });
   const mutation = useMutation({
@@ -53,8 +58,8 @@ const EditProfile = () => {
   };
   return (
     <>
-      <div>
-        <form>
+      <div className="lg:px-4">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid lg:grid-cols-2 gap-5">
             <Controller
               name="firstname"
@@ -96,7 +101,7 @@ const EditProfile = () => {
                 />
               )}
             />
-            <Controller
+            {/* <Controller
               name="username"
               control={control}
               rules={{
@@ -115,9 +120,9 @@ const EditProfile = () => {
                   ref={null}
                 />
               )}
-            />
-            <div className="mt-[4px]">
-              <label className="mb-1 block mt-3 fw-500 text-[#000000B2]">
+            /> */}
+            <div className="">
+              <label className="mb-1 block  fw-500 text-[#000000B2]">
                 Phone Number
               </label>
               <PhoneInputWithCountry
@@ -156,7 +161,7 @@ const EditProfile = () => {
                   selectOptions={genderOption}
                   selected={field.value}
                   boxClassName="rounded-[4px] border border-gray-400 pr-3 pl-2 add-min"
-                  labelClassName="text-[#828282] block mt-[15px]"
+                  labelClassName="text-[#000000B2] fw-500 mt-[15px]"
                   error={errors.gender?.message}
                   {...field}
                   ref={null}
@@ -165,7 +170,7 @@ const EditProfile = () => {
             />
 
             <div>
-              <p className="text-[#828282] block mt-[15px]">Country</p>
+              <p className="text-[#000000B2] fw-500">Country</p>
               <Controller
                 name="country"
                 control={control}
@@ -176,16 +181,24 @@ const EditProfile = () => {
                   },
                 }}
                 render={({ field }) => (
-                  <select className="" {...field}>
+                  <select className="w-full p-3 rounded-lg border border-gray-400" {...field}>
                     <option value="">Select an option</option>
-                    {/* {
-                        countries.all.
-                    } */}
+                    {
+                        countries.all.map((item) => (
+                            <option value={item.name} key={item.ioc}>{item.name}</option>
+                        ))
+                    }
                   </select>
                 )}
               />
             </div>
           </div>
+          <div className="mt-12">
+          <Button
+            title={isBusy ? <BarsSpinner size={"16"} color="white" /> : "Update"}
+            disabled={!isValid}
+          />
+        </div>
         </form>
       </div>
     </>
