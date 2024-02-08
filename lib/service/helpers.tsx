@@ -1,4 +1,14 @@
 export const getToken = () => {
-    const token = localStorage.getItem('guard_token')
-    return `Bearer ${token}`
+    if (typeof window !== 'undefined') {
+        // Perform localStorage action
+        const token = localStorage.getItem('glob_token')
+        return token
+      }
+}
+export const getBearerToken = () => {
+    if (typeof window !== 'undefined') {
+        // Perform localStorage action
+        const token = localStorage.getItem('glob_token')
+        return `Bearer ${token}`
+      }
 }

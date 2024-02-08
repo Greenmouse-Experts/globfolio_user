@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -82,12 +82,15 @@ const LoginForm = () => {
                 error={errors.email?.message}
                 type={InputType.email}
                 {...field}
+                ref={null}
               />
             )}
           />
         </div>
         <div className="mt-6 relative">
-          <Link href={'/auth/forget'} className="absolute fs-500 top-0 right-0">Forgot Password?</Link>
+          <Link href={"/auth/forget"} className="absolute fs-500 top-0 right-0">
+            Forgot Password?
+          </Link>
           <Controller
             name="password"
             control={control}
@@ -110,6 +113,7 @@ const LoginForm = () => {
                 error={errors.password?.message}
                 type={InputType.password}
                 {...field}
+                ref={null}
               />
             )}
           />
@@ -121,17 +125,22 @@ const LoginForm = () => {
           />
         </div>
         <div className="my-6 relative">
-            <p className="border-t border-gray-300"></p>
-            <div className="absolute -top-5 left-0 w-full flex justify-center">
-                <p className="bg-white p-2">OR</p>
-            </div>
+          <p className="border-t border-gray-300"></p>
+          <div className="absolute -top-5 left-0 w-full flex justify-center">
+            <p className="bg-white p-2">OR</p>
+          </div>
         </div>
         <div className="mt-6">
-                <GoogleSignin/>
-            </div>
-            <div className="mt-4">
-                <p>Don't have an account, click here to <Link className="fw-500 text-primary" href={'/auth/register'}>Register</Link></p>
-            </div>
+          <GoogleSignin />
+        </div>
+        <div className="mt-4">
+          <p>
+            Don't have an account, click here to{" "}
+            <Link className="fw-500 text-primary" href={"/auth/register"}>
+              Register
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   );

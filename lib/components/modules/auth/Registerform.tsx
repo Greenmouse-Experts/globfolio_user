@@ -10,9 +10,9 @@ import { BarsSpinner } from "../../ui/Loaders/Spinners";
 import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "@/lib/service/api/authApi";
 import SelectInput from "../../ui/SelectInput";
-import GoogleSignin from "./GoogleSignin";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import GoogleSignUp from "./GoogleSignUp";
 
 const RegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -91,6 +91,7 @@ const RegisterForm = () => {
                 error={errors.firstname?.message}
                 type={InputType.text}
                 {...field}
+                ref={null}
               />
             )}
           />
@@ -110,6 +111,7 @@ const RegisterForm = () => {
                 error={errors.lastname?.message}
                 type={InputType.text}
                 {...field}
+                ref={null}
               />
             )}
           />
@@ -129,6 +131,7 @@ const RegisterForm = () => {
                 error={errors.username?.message}
                 type={InputType.text}
                 {...field}
+                ref={null}
               />
             )}
           />
@@ -148,6 +151,7 @@ const RegisterForm = () => {
                 error={errors.email?.message}
                 type={InputType.email}
                 {...field}
+                ref={null}
               />
             )}
           />
@@ -216,6 +220,7 @@ const RegisterForm = () => {
                 error={errors.password?.message}
                 type={InputType.password}
                 {...field}
+                ref={null}
               />
             )}
           />
@@ -240,6 +245,7 @@ const RegisterForm = () => {
                 error={errors.confirm_password?.message}
                 type={InputType.password}
                 {...field}
+                ref={null}
               />
             )}
           />
@@ -257,7 +263,7 @@ const RegisterForm = () => {
             </div>
         </div>
         <div className="mt-6">
-                <GoogleSignin/>
+                <GoogleSignUp/>
             </div>
             <div className="mt-4">
                 <p>Already have an account, click here to <Link className="fw-500 text-primary" href={'/auth/login'}>Login</Link></p>
