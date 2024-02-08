@@ -1,35 +1,38 @@
-"use client"
-import React, { useState } from 'react'
-import { GoPasskeyFill } from 'react-icons/go';
-import { toast } from 'react-toastify';
-import { useMutation } from '@tanstack/react-query';
-import ProfileAvatar from '@/lib/components/ui/ProfileAvatar';
-import useAuth from '@/lib/hooks/authUser';
-import useModal from '@/lib/hooks/useModal';
-import { updateProfilePhoto } from '@/lib/service/api/authApi';
-import { formatStatus } from '@/lib/utils/formatHelp';
-import Button from '@/lib/components/ui/Button';
-import ChangePassword from '@/lib/components/modules/settings/changePassword';
+"use client";
+import React, { useState } from "react";
+import { GoPasskeyFill } from "react-icons/go";
+import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+import ProfileAvatar from "@/lib/components/ui/ProfileAvatar";
+import useAuth from "@/lib/hooks/authUser";
+import useModal from "@/lib/hooks/useModal";
+import { updateProfilePhoto } from "@/lib/service/api/authApi";
+import { formatStatus } from "@/lib/utils/formatHelp";
+import Button from "@/lib/components/ui/Button";
+import ChangePassword from "@/lib/components/modules/settings/changePassword";
+import dayjs from "dayjs";
+import EditProfile from "@/lib/components/modules/settings/editProfile";
 
 const SettingsPage = () => {
   const { user, saveUser } = useAuth();
   const [isUpdate, setIsUpdate] = useState(false);
-  const {Modal:Password, setShowModal:ShowPassword} = useModal()
+  const { Modal: Password, setShowModal: ShowPassword } = useModal();
+  const { Modal: Edit, setShowModal: ShowEdit } = useModal();
   const update = useMutation({
     mutationFn: updateProfilePhoto,
     mutationKey: ["update"],
     onSuccess: (data) => {
-      toast.success(data.message)
-      setIsUpdate(false)
+      toast.success(data.message);
+      setIsUpdate(false);
       saveUser({
         ...user,
-        image: data.data.image
-      })
+        image: data.data.image,
+      });
     },
-    onError: (error:any) => {
-      toast.error(error.response.data.message)
-      setIsUpdate(false)
-    }
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+      setIsUpdate(false);
+    },
   });
   const handleChangePicture = async (e: any) => {
     setIsUpdate(true);
@@ -68,56 +71,88 @@ const SettingsPage = () => {
           </div>
           <div className="flex items-center gap-x-3">
             <div className="w-44">
-            <Button title={'Edit Profile'}/>
+              <Button title={"Edit Profile"} />
             </div>
-            <div className="w-12 h-12 place-center rounded-lg bg-primary text-white cursor-pointer" onClick={() => ShowPassword(true)}>
-                <GoPasskeyFill className="text-xl"/>
+            <div
+              className="w-12 h-12 place-center rounded-lg bg-primary text-white cursor-pointer"
+              onClick={() => ShowPassword(true)}
+            >
+              <GoPasskeyFill className="text-xl" />
             </div>
           </div>
         </div>
         <div className="mt-12 lg:px-6">
-            <p className="syne text-lg lg:text-3xl fw-600">My Profile</p>
-            <div className="mt-6 lg:grid gap-4">
-                <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
-                    <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">Registration Date:</p>
-                    <p className="lg:text-xl syne">N/A</p>
-                </div>
-                <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
-                    <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">Full Name:</p>
-                    <p className="lg:text-xl syne">{user.name}</p>
-                </div>
-                <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
-                    <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">Email:</p>
-                    <p className="lg:text-xl syne">{user.email}</p>
-                </div>
-                <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
-                    <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">Phone Number:</p>
-                    <p className="lg:text-xl syne">{user.phone}</p>
-                </div>
-                <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
-                    <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">Address:</p>
-                    <p className="lg:text-xl syne">N/A</p>
-                </div>
-                <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
-                    <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">Facebook Link:</p>
-                    <p className="lg:text-xl syne">N/A</p>
-                </div>
-                <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
-                    <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">Linkldn Link:</p>
-                    <p className="lg:text-xl syne">N/A</p>
-                </div>
-                <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
-                    <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">X Link:</p>
-                    <p className="lg:text-xl syne">N/A</p>
-                </div>
+          <p className="syne text-lg lg:text-3xl fw-600">My Profile</p>
+          <div className="mt-6 lg:grid gap-4">
+            <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
+              <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
+                Registration Date:
+              </p>
+              <p className="lg:text-xl syne">
+                {dayjs(user.joined).format("dddd DD, MMMM YYYY")}
+              </p>
             </div>
+            <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
+              <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
+                Full Name:
+              </p>
+              <p className="lg:text-xl syne">{user.name}</p>
+            </div>
+            <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
+              <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
+                Email:
+              </p>
+              <p className="lg:text-xl syne">{user.email}</p>
+            </div>
+            <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
+              <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
+                Phone Number:
+              </p>
+              <p className="lg:text-xl syne">{user.phone}</p>
+            </div>
+            <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
+              <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
+                Gender:
+              </p>
+              <p className="lg:text-xl syne">{user.gender}</p>
+            </div>
+            <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
+              <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
+                Email Status:
+              </p>
+              <div className="lg:text-xl syne">
+                {user.email_verify ? (
+                  <p className="flex items-center gap-x-2 fw-600 text-green-600">
+                    <span className="w-3 h-3 bg-green-400 circle block"></span>
+                    Verified
+                  </p>
+                ) : (
+                  <p className="flex items-center gap-x-2 text-orange-600 fw-600">
+                    <span className="w-3 h-3 bg-orange-600 circle block"></span>
+                    Pending
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
+              <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
+                Country:
+              </p>
+              <p className="lg:text-xl syne">
+                {user.country ? user?.country : "N/A"}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       <Password title="Change Password" size="md" type="withCancel">
-        <ChangePassword close={() => ShowPassword(false)}/>
+        <ChangePassword close={() => ShowPassword(false)} />
       </Password>
+      <Edit title="Edit Profile" size="lg" type="withCancel">
+        <EditProfile/>
+      </Edit>
     </>
   );
-}
+};
 
-export default SettingsPage
+export default SettingsPage;
