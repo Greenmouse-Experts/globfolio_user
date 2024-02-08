@@ -1,7 +1,6 @@
-"use client";
+"use client"
 
 import DashboardLayout from "@/lib/components/layout";
-
 
 export default function RootLayout({
   children,
@@ -10,7 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <DashboardLayout children={children}/>
+      <main>
+        <DashboardLayout children={children}/>
+      </main>
     </>
   );
 }

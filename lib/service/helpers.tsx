@@ -4,6 +4,7 @@ export const getToken = () => {
         const token = localStorage.getItem('glob_token')
         return token
       }
+      return null
 }
 export const getBearerToken = () => {
     if (typeof window !== 'undefined') {

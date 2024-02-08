@@ -14,7 +14,10 @@ export default function Home() {
       navigate.push('/dashboard')
     }
   }, [])
+  if (!token) {
+    return;
+  }
   return (
-    <></>
+    <div></div>
   );
 }

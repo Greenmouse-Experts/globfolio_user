@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect } from "react";
 import SidebarLayout from "./section/sidebar";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -7,7 +8,7 @@ import {
   MenuHandler,
   MenuItem,
   MenuList,
-} from "@material-tailwind/react";
+} from "@/lib/components/ui/TailwindComp";
 import { BsGear } from "react-icons/bs";
 import { IoLogOutOutline } from "react-icons/io5";
 import useAuth from "@/lib/hooks/authUser";
@@ -28,13 +29,8 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     if(!token){
       navigate.push("/auth/login");
-    }else{
-      navigate.push('/dashboard')
     }
   }, [])
-  if (!token) {
-    return;
-  }
   return (
     <>
       <div className="flex bg-light">
