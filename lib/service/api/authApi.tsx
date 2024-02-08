@@ -75,3 +75,21 @@ export const googleSignin = async (payload:any) => {
     .post(`${ENDPOINT.LOGIN_WITH_GOOGLE}`, payload)
     .then((response) => response.data);
 };
+
+export const updateProfilePhoto = async (payload:FormData) => {
+  return axios
+    .post(`${ENDPOINT.UPDATE_AVATAR}`, payload)
+    .then((response) => response.data);
+};
+
+export const updateProfile = async (payload:any) => {
+  return axios
+    .patch(`${ENDPOINT.UPDATE_PROFILE}`, payload)
+    .then((response) => response.data);
+};
+
+export const updatePassword = async (payload:any) => {
+  return axios
+    .patch(`${ENDPOINT.UPDATE_PASSWORD}`, payload)
+    .then((response) => response.data);
+};

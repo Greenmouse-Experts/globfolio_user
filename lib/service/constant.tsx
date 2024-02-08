@@ -17,3 +17,6 @@ export enum HTTP_METHODS {
   export const RESEND_VERIFY_MAIL = `/resendCode`
   export const FORGET_PASSWORD = `/forgot-password`
   export const RESET_PASSWORD = `/reset-password`
+  export const UPDATE_AVATAR = `/user/profile/update-pic`
+  export const UPDATE_PROFILE = `/user/update-account`
+  export const UPDATE_PASSWORD = `/users/change-password`
