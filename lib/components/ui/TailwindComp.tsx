@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   ThemeProvider,
   Menu,
@@ -11,7 +11,16 @@ import {
   AccordionBody,
   Select,
   Option,
-} from '@material-tailwind/react';
+  Timeline,
+  TimelineItem,
+  TimelineConnector,
+  TimelineIcon,
+  Typography,
+  TimelineHeader,
+  Card,
+  CardBody,
+  CardHeader,
+} from "@material-tailwind/react";
 
 export {
   ThemeProvider,
@@ -25,4 +34,13 @@ export {
   AccordionHeader,
   Select,
   Option,
+  Timeline,
+  TimelineItem,
+  TimelineConnector,
+  TimelineIcon,
+  Typography,
+  TimelineHeader,
+  Card,
+  CardBody,
+  CardHeader,
 };

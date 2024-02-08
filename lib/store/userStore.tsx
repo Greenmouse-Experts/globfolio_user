@@ -11,20 +11,28 @@ interface userProps{
     email: string;
     token: string;
     image: string;
-    state: string;
+    country: string;
     phone: string;
     id: string;
-    account: string
+    account: string;
+    joined: string;
+    email_verify: boolean;
+    gender: string;
+    username: string;
 }
 const userInitState = {
     name: '',
     email: '',
     token: '',
     image: '',
-    state: '',
+    country: '',
     account: '',
     phone: '',
-    id: ''
+    id: '',
+    joined: '',
+    email_verify: false,
+    gender: '',
+    username: ''
 }
 const useAuthStore = create<Props>()(
   persist(

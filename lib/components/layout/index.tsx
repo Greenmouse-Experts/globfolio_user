@@ -39,7 +39,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         </div>
         <div className="w-full lg:w-[calc(100%_-_256px)] min-h-screen bg-light py-4 lg:py-9">
           <div className="">
-            <div className="h-[60px] relative index-30">
+            <div className="h-[60px] relative z-10">
               <div className="fixed top-0 w-full lg:w-[calc(100%_-_250px)] pl-9 pr-5 py-4 lg:py-[26px] bg-light flex items-center justify-between">
                 <p className="fw-600 lg:text-lg">User Dashboard</p>
                 <div className="flex gap-x-5 items-center">

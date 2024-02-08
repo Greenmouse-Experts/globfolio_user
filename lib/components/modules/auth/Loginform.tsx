@@ -13,9 +13,11 @@ import { loginUser } from "@/lib/service/api/authApi";
 import useAuth from "@/lib/hooks/authUser";
 import GoogleSignin from "./GoogleSignin";
 import Link from "next/link";
+import useRoutine from "@/lib/hooks/useRoutine";
 
 const LoginForm = () => {
   const { saveUser } = useAuth();
+  const {saveSub} = useRoutine()
   const [isBusy, setIsBusy] = useState(false);
   const router = useRouter();
   const login = useMutation({
@@ -47,11 +49,16 @@ const LoginForm = () => {
           email: data.data.email,
           token: data.data.access_token,
           image: data.data.avatar,
-          state: "",
-          phone: data.data.phone,
+          country: data.data.country,
+          phone: data.data.phone_no,
+          joined: data.data.createdAt,
+          gender: data.data.gender,
+          email_verify: data.data.email_verify,
           id: data.data.id,
           account: "",
+          username: data.data.userName
         });
+        saveSub(data.data.subscription)
         router.push("/dashboard");
       },
       onError: (error: any) => {

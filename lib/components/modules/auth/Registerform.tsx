@@ -13,6 +13,7 @@ import SelectInput from "../../ui/SelectInput";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import GoogleSignUp from "./GoogleSignUp";
+import { genderOption } from "@/lib/utils/hardData";
 
 const RegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -42,20 +43,7 @@ const RegisterForm = () => {
         confirm_password: ""
     },
   });
-  const genderOption = [
-    {
-        label: "Male",
-        value: "Male"
-    },
-    {
-        label: "Female",
-        value: "Female"
-    },
-    {
-        label: "Others",
-        value: "Others"
-    }
-  ]
+ 
   const onSubmit = (datas: any) => {
     setIsBusy(true);
     login.mutate(datas, {

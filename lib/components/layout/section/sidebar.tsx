@@ -86,6 +86,7 @@ const SidebarLayout = () => {
               component={<Link href={"/settings"} />}
               icon={<BsGear className="text-xl" />}
               className="mt-12"
+              active={path === '/settings' && true}
             >
               <p className="fs-400">Settings</p>
             </MenuItem>
