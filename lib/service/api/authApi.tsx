@@ -63,3 +63,15 @@ export const resetPass = async (payload:any) => {
     .post(`${ENDPOINT.RESET_PASSWORD}`, payload)
     .then((response) => response.data);
 };
+
+export const googleSignup = async (payload:any) => {
+  return axios
+    .post(`${ENDPOINT.REGISTER_WITH_GOOGLE}`, payload)
+    .then((response) => response.data);
+};
+
+export const googleSignin = async (payload:any) => {
+  return axios
+    .post(`${ENDPOINT.LOGIN_WITH_GOOGLE}`, payload)
+    .then((response) => response.data);
+};
