@@ -32,6 +32,9 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
       navigate.push('/dashboard')
     }
   }, [])
+  if (!token) {
+    return;
+  }
   return (
     <>
       <div className="flex bg-light">
