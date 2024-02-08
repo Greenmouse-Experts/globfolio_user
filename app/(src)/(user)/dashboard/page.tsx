@@ -1,4 +1,5 @@
 import RecentPicks from '@/lib/components/modules/dashboard/recentPicks'
+import TopGroups from '@/lib/components/modules/dashboard/topGroups'
 import WelcomeBox from '@/lib/components/modules/dashboard/welcomeBox'
 import React from 'react'
 
@@ -13,6 +14,9 @@ const UserDashboard = () => {
             <div className='bg-white rounded-lg shadow'>
               <RecentPicks/>
             </div>
+          </div>
+          <div className='mt-4 lg:mt-8 bg-white rounded-lg shadow'>
+            <TopGroups/>
           </div>
         </div>
     </>

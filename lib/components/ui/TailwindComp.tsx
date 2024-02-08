@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   ThemeProvider,
   Menu,
@@ -17,7 +17,10 @@ import {
   TimelineIcon,
   Typography,
   TimelineHeader,
-} from '@material-tailwind/react';
+  Card,
+  CardBody,
+  CardHeader,
+} from "@material-tailwind/react";
 
 export {
   ThemeProvider,
@@ -37,4 +40,7 @@ export {
   TimelineIcon,
   Typography,
   TimelineHeader,
+  Card,
+  CardBody,
+  CardHeader,
 };

@@ -29,7 +29,7 @@ const RecentPicks = () => {
               </TimelineIcon>
               <div className="flex flex-col gap-1">
                 <Typography placeholder={""} variant="h6" color="blue-gray">
-                  $2400, Design changes
+                  Upto $2400 in stocks availble in upcoming Bull Run.
                 </Typography>
                 <Typography
                   placeholder={""}
@@ -50,7 +50,7 @@ const RecentPicks = () => {
               </TimelineIcon>
               <div className="flex flex-col gap-1">
                 <Typography placeholder={""} variant="h6" color="blue-gray">
-                  New order #1832412
+                  New stock alert
                 </Typography>
                 <Typography
                   placeholder={""}
@@ -70,7 +70,7 @@ const RecentPicks = () => {
               </TimelineIcon>
               <div className="flex flex-col gap-1">
                 <Typography placeholder={""} variant="h6" color="blue-gray">
-                  Payment completed for order #4395133
+                  Reimbursement now availbale in winter
                 </Typography>
                 <Typography
                   placeholder={""}
