@@ -48,7 +48,7 @@ const LoginForm = () => {
           name: data.data.fullname,
           email: data.data.email,
           token: data.data.access_token,
-          image: data.data.avatar,
+          image: data.data.picture.secure_url,
           country: data.data.country,
           phone: data.data.phone_no,
           joined: data.data.createdAt,

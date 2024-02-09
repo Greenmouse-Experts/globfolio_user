@@ -26,7 +26,7 @@ const SettingsPage = () => {
       setIsUpdate(false);
       saveUser({
         ...user,
-        image: data.data.image,
+        image: data.data.picture.secure_url,
       });
     },
     onError: (error: any) => {

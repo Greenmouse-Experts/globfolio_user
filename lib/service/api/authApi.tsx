@@ -1,12 +1,12 @@
 import axios from "axios";
 import * as ENDPOINT from '../constant'
-import { getBearerToken, getToken } from "../helpers";
+import { getToken } from "../helpers";
 
 axios.defaults.baseURL = ENDPOINT.BASE_URL;
-axios.defaults.headers.common["Authorization"] = getBearerToken();
+axios.defaults.headers.common["Authorization"] = getToken();
 axios.interceptors.request.use(
   function(config) {
-    const token = getBearerToken(); 
+    const token = getToken(); 
     if (token) {
       config.headers["Authorization"] = token;
     }
