@@ -48,7 +48,7 @@ const LoginForm = () => {
           name: data.data.fullname,
           email: data.data.email,
           token: data.data.access_token,
-          image: data.data.picture.secure_url,
+          image: data.data?.picture?.secure_url,
           country: data.data.country,
           phone: data.data.phone_no,
           joined: data.data.createdAt,
@@ -56,7 +56,7 @@ const LoginForm = () => {
           email_verify: data.data.email_verify,
           id: data.data.id,
           account: "",
-          username: data.data.userName
+          username: data.data?.userName
         });
         saveSub(data.data.subscription)
         router.push("/dashboard");
