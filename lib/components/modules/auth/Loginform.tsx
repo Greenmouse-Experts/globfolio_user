@@ -87,7 +87,7 @@ const LoginForm = () => {
                 icon={<AiOutlineMail className="text-2xl mx-2 lg:mx-4" />}
                 placeholder="victorchigozie@gmail.com"
                 error={errors.email?.message}
-                type={InputType.email}
+                type={InputType.text}
                 {...field}
                 ref={null}
               />

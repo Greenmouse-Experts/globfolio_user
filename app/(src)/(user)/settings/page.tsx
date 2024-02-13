@@ -45,9 +45,9 @@ const SettingsPage = () => {
   return (
     <>
       <div>
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-x-5">
-            <div className="relative">
+        <div className="lg:flex justify-between items-center">
+          <div className="lg:flex items-center gap-x-5">
+            <div className="relative flex justify-center lg:block">
               <ProfileAvatar
                 url={user.image}
                 name={user.name}
@@ -55,9 +55,9 @@ const SettingsPage = () => {
                 font={38}
               />
             </div>
-            <div>
+            <div className="text-center lg:text-left">
               <p className="text-lg lg:text-3xl syne">{user.name}</p>
-              <div className="mt-2">{formatStatus["active"]}</div>
+              <div className="mt-2 flex lg:block justify-center">{formatStatus["active"]}</div>
               <button className="bg-primary mt-6 relative px-6 py-2 rounded-lg shades text-white overflow-hidden">
                 <input
                   type="file"
@@ -69,7 +69,7 @@ const SettingsPage = () => {
               </button>
             </div>
           </div>
-          <div className="flex items-center gap-x-3">
+          <div className="flex justify-center lg:justify-end items-center gap-x-3 mt-4 lg:mt-0">
             <div className="w-44">
               <Button title={"Edit Profile"} onClick={() => ShowEdit(true)}/>
             </div>
