@@ -1,5 +1,5 @@
 import {
-  MdOutlineDashboard,
+  MdOutlineDashboard, MdOutlineSubscriptions,
 } from 'react-icons/md';
 import { HiOutlineUsers } from "react-icons/hi2";
 import { RiUserSettingsLine } from 'react-icons/ri';
@@ -19,6 +19,12 @@ export const Routes = [
     name: 'Dashboard',
     icon: <MdOutlineDashboard className="text-xl" />,
     route: '/dashboard',
+    submenu: [],
+  },
+  {
+    name: 'Subscriptions',
+    icon: <MdOutlineSubscriptions className="text-xl" />,
+    route: '/subscription',
     submenu: [],
   },
   {

@@ -11,6 +11,7 @@ import {
 } from "@/lib/components/ui/TailwindComp";
 import { BsGear } from "react-icons/bs";
 import { IoLogOutOutline } from "react-icons/io5";
+import { GiHamburgerMenu } from "react-icons/gi";
 import useAuth from "@/lib/hooks/authUser";
 import useModal from "@/lib/hooks/useModal";
 import ProfileAvatar from "../ui/ProfileAvatar";
@@ -23,6 +24,7 @@ interface Props {
 }
 const DashboardLayout: React.FC<Props> = ({ children }) => {
   const {user} = useAuth()
+  const [toggled, setToggled] = React.useState(false);
   const {Modal, setShowModal} = useModal()
   const navigate = useRouter()
   const token = getToken();
@@ -35,12 +37,15 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
     <>
       <div className="flex bg-light">
         <div className="lg:w-[250px]">
-          <SidebarLayout />
+          <SidebarLayout setToggled={setToggled} toggled={toggled} />
         </div>
         <div className="w-full lg:w-[calc(100%_-_256px)] min-h-screen bg-light py-4 lg:py-9">
           <div className="">
             <div className="h-[60px] relative z-10">
-              <div className="fixed top-0 w-full lg:w-[calc(100%_-_250px)] pl-9 pr-5 py-4 lg:py-[26px] bg-light flex items-center justify-between">
+              <div className="fixed top-0 w-full lg:w-[calc(100%_-_250px)] pl-3 lg:pl-9 pr-5 py-4 lg:py-[26px] bg-light flex items-center justify-between">
+                <div className="lg:hidden">
+                  <GiHamburgerMenu className="text-xl" onClick={() => setToggled(!toggled)}/>
+                </div>
                 <p className="fw-600 lg:text-lg">User Dashboard</p>
                 <div className="flex gap-x-5 items-center">
                   {/* <NotifyDrop/> */}

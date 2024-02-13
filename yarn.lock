@@ -458,6 +458,11 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.2.tgz#5950e50960793055845e956c427fc2b0d70c5239"
   integrity sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==
 
+"@types/paystack@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@types/paystack/-/paystack-2.0.4.tgz#d875d2df8ed75290182f66772fe5e2c91d3d9d99"
+  integrity sha512-v390K5ZrOdByQWqjiMMrCjgcTM/hBqZQDtNu1EPU4dgXXUJsI6mYKXA1lrM9o1s91Pv9LzQ5nrBQa5vCJUPZbg==
+
 "@types/prop-types@*":
   version "15.7.11"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.11.tgz#2596fb352ee96a1379c657734d4b913a613ad563"
@@ -1396,6 +1401,11 @@ react-apexcharts@^1.4.1:
   dependencies:
     prop-types "^15.8.1"
 
+react-country-flag@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-country-flag/-/react-country-flag-3.1.0.tgz#f0c4c332934a77d3e894ba4800634f7a887e53d4"
+  integrity sha512-JWQFw1efdv9sTC+TGQvTKXQg1NKbDU2mBiAiRWcKM9F1sK+/zjhP2yGmm8YDddWyZdXVkR8Md47rPMJmo4YO5g==
+
 react-dom@18.2.0, react-dom@^18:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
@@ -1436,6 +1446,11 @@ react-otp-input@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/react-otp-input/-/react-otp-input-3.1.1.tgz#910169629812c40a614e6c175cc2c5f36102bb61"
   integrity sha512-bjPavgJ0/Zmf/AYi4onj8FbH93IjeD+e8pWwxIJreDEWsU1ILR5fs8jEJmMGWSBe/yyvPP6X/W6Mk9UkOCkTPw==
+
+react-paystack@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-paystack/-/react-paystack-5.0.0.tgz#dbe47a7a55098154e7077b3aa917d4a1e19ce345"
+  integrity sha512-d7oA+ksX0GES2Uyh9H6E8Oq4yD/r3CDVfhKpZCjcztW2IIVf6pldscRs6+gFfGWWk9IvEK2G6QqZmaGKlbGHhw==
 
 react-phone-number-input@^3.3.9:
   version "3.3.9"
@@ -1714,6 +1729,11 @@ svg.select.js@^3.0.1:
   integrity sha512-h5IS/hKkuVCbKSieR9uQCj9w+zLHoPh+ce19bBYyqF53g6mnPB8sAtIbe1s9dh2S2fCmYX2xel1Ln3PJBbK4kw==
   dependencies:
     svg.js "^2.6.5"
+
+swiper@^11.0.6:
+  version "11.0.6"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-11.0.6.tgz#787187e2711b01301b4c67b86b8e03099e2fc9f2"
+  integrity sha512-W/Me7MQl5rNgdM5x9i3Gll76WsyVpnHn91GhBOyL7RCFUeg62aVnflzlVfIpXzZ/87FtJOfAoDH79ZH2Yq76zA==
 
 tabbable@^6.0.1:
   version "6.2.0"

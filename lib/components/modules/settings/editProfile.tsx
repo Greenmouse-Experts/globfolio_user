@@ -17,7 +17,7 @@ interface Props {
     close: () => void
 }
 const EditProfile:FC<Props> = ({close}) => {
-    const {user, firstName, lastName} = useAuth()
+    const {user, firstName, lastName, saveUser} = useAuth()
   const [isBusy, setIsBusy] = useState(false);
   const {
     control,
@@ -39,6 +39,12 @@ const EditProfile:FC<Props> = ({close}) => {
     mutationFn: updateProfile,
     onSuccess: (data) => {
       toast.success(data.message);
+      saveUser({
+        ...user,
+        phone: data.data.phone_no,
+        country: data.data.country,
+        name: data.data.fullname
+      })
       setIsBusy(false);
       close();
     },
@@ -50,17 +56,18 @@ const EditProfile:FC<Props> = ({close}) => {
   const onSubmit = async (data: any) => {
     setIsBusy(true);
     const payload = {
-      password: data.old_password,
-      new_assword: data.new_password,
-      confirm_password: data.new_password_confirmation,
-    };
+      fullname: `${data.firstname} ${data.lastname}`,
+      country: data?.coutry,
+      phone_no: data?.phone_no,
+      gender: data?.gender
+    }
     mutation.mutate(payload);
   };
   return (
     <>
       <div className="lg:px-4">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid lg:grid-cols-2 gap-5">
+          <div className="grid lg:grid-cols-2 gap-5 w-full">
             <Controller
               name="firstname"
               control={control}

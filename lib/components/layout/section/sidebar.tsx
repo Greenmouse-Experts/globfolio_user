@@ -1,18 +1,22 @@
 "use client";
 
-import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
-import { RouteType, Routes } from "./routes";
+import { FC, Suspense } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BiLogOutCircle } from "react-icons/bi";
 import { BsGear } from "react-icons/bs";
-import { usePathname } from "next/navigation";
 import useModal from "@/lib/hooks/useModal";
-import Link from "next/link";
+import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
+import { RouteType, Routes } from "./routes";
 import LogoutModal from "../../modules/auth/LogoutModal";
-import Image from "next/image";
 import logo from "../../../../public/logo.svg";
-import { Suspense } from "react";
 
-const SidebarLayout = () => {
+interface Props {
+  setToggled: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+  toggled: boolean;
+}
+const SidebarLayout: FC<Props> = ({ setToggled, toggled }) => {
   const path = usePathname();
   const { Modal, setShowModal } = useModal();
 
@@ -20,9 +24,11 @@ const SidebarLayout = () => {
     <Suspense>
       <div className="left-0 top-0 fixed overflow-y-hidden index-30  bg-primary text-white">
         <Sidebar
-          customBreakPoint="1024px"
+          customBreakPoint="960px"
           className="h-screen overflow-y-hidden scroll-pro pb-4 fs-700 fw-500 px-4"
           backgroundColor=""
+           onClick={() => setToggled(false)}
+        toggled={toggled}
         >
           <div className="flex justify-center py-2 lg:py-2 lg:pb-8 items-center">
             <Link href="/" className="flex justify-center gap-x-1">
