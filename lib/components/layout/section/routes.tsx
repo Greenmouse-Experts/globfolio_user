@@ -22,6 +22,12 @@ export const Routes = [
     submenu: [],
   },
   {
+    name: 'Subscriptions',
+    icon: <HiOutlineUsers className="text-xl" />,
+    route: '/subscription',
+    submenu: [],
+  },
+  {
     name: 'Analyst Picks',
     icon: <HiOutlineUsers className="text-xl" />,
     route: '/picks',
