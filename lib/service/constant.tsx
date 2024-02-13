@@ -26,3 +26,8 @@ export enum HTTP_METHODS {
   export const VERIFY_SUB_PAYMENT = `/subscription/verifySubscription`
   export const VERIFY_UPGRADE_SUB = `/subscription/upgradeVerify`
   export const UPGRADE_SUB = `/subscription/upgrade`
+
+  // picks
+  export const GET_FREE_PICKS = `/stockAdvisory/stockAdvisorysFree`
+  export const GET_ALL_PICKS = `/stockAdvisory/stockAdvisorys`
+  // export const GET_SINGLE_PICK = `/stockAdvisory/stockAdvisorys/`
