@@ -5,11 +5,11 @@ import React from 'react'
 const UserSubscripton = () => {
   return (
     <>
-        <div className='flex'>
+        <div className='lg:flex'>
             <div className='lg:w-4/12 lg:mt-12'>
                 <ActiveSub/>
             </div>
-            <div className='lg:w-8/12 mt-12 flex justify-center'>
+            <div className='lg:w-8/12 w-full mt-12 flex justify-center'>
                 <SubPlanList/>
             </div>
         </div>

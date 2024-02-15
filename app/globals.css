@@ -53,7 +53,7 @@ input[type="radio"]:checked {
   accent-color: #111827 !important;
 }
 input[type="checkbox"]:checked {
-  accent-color: #111827 !important;
+  accent-color: hsl(221, 39%, 11%) !important;
 }
 .syne{
   font-family: 'Syne', sans-serif;

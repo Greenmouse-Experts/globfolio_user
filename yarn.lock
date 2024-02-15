@@ -758,6 +758,11 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
+country-code-lookup@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/country-code-lookup/-/country-code-lookup-0.1.1.tgz#a3a27e5430144e90e4f0af17bcc1c10d46b6c266"
+  integrity sha512-g3yr9E8oCnlRo1PNHwHEQEjY4aDszS/H35gQZ21ToXd0eoydUAXWACTNYqiL6Tp0gMn+1l+ebErwT2PKw5c88Q==
+
 country-data-list@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/country-data-list/-/country-data-list-1.3.0.tgz#e95d52c01bf6ee0475cc48d4c13fc112626c8d01"
