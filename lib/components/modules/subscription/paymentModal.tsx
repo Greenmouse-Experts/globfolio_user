@@ -47,7 +47,8 @@ const PaymentModal:FC<Props> = ({name}) => {
       console.log(data);
       toast.success("Subscription Upgraded Successfully");
     },
-    onError: (error) => {
+    onError: (error:any) => {
+      toast.error(error.response.data.message)
       console.log(error);
     },
   });

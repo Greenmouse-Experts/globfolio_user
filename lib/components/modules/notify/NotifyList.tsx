@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import CubeLoader from "../../ui/Loaders/CubeLoader/CubeLoader";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAuth from "@/lib/hooks/authUser";
-import { getMyNotify, markNotify } from "@/lib/service/api/routineApi";
+import { deleteNotify, getMyNotify, markNotify } from "@/lib/service/api/routineApi";
 import ProfileAvatar from "../../ui/ProfileAvatar";
 // dayjs time format
 const dayjs = require("dayjs");
@@ -49,7 +49,10 @@ const NotifyList:FC<Props> = ({status}) => {
         mutationFn: markNotify,
         mutationKey: ['markRead']
     })
-    
+    const mutateDel = useMutation({
+        mutationFn: deleteNotify,
+        mutationKey: ['delNotify']
+    })
     const MarkAsRead = (item:string) => {
        mutateRead.mutate(item, {
         onSuccess: () => {
@@ -61,6 +64,17 @@ const NotifyList:FC<Props> = ({status}) => {
         }
       })
     }
+    const DelNotify = (item:string) => {
+        mutateDel.mutate(item, {
+         onSuccess: () => {
+             toast.success('Marked as read')
+             getNotify()
+         },
+         onError: (error:any) => {
+             toast.error(error.response.data.message)
+         }
+       })
+     }
     return (
       <>
         <div>
@@ -95,6 +109,7 @@ const NotifyList:FC<Props> = ({status}) => {
                       </MenuHandler>
                       <MenuList placeholder={''} className="bg-[#0D0D0D]">
                         <MenuItem placeholder={''} className="my-1 fw-500 text-white bg-[#131313] pt-1" onClick={() => MarkAsRead(item.id)}>Mark as read</MenuItem>
+                        <MenuItem placeholder={''} className="my-1 fw-500 text-white bg-red-600 pt-1" onClick={() => DelNotify(item.id)}>Delete</MenuItem>
                       </MenuList>
                     </Menu>
                   </div>
