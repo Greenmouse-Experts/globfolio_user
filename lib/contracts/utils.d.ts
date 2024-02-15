@@ -12,3 +12,8 @@ export interface InputOptions {
     value: string | number,
     label: string,
 }
+
+export interface PicksInput {
+  userId: string,
+  stockId: string | number,
+}

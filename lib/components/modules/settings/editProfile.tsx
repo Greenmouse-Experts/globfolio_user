@@ -54,10 +54,12 @@ const EditProfile:FC<Props> = ({close}) => {
     },
   });
   const onSubmit = async (data: any) => {
+    console.log(data);
+    
     setIsBusy(true);
     const payload = {
       fullname: `${data.firstname} ${data.lastname}`,
-      country: data?.coutry,
+      country: data?.country,
       phone_no: data?.phone_no,
       gender: data?.gender
     }
@@ -191,8 +193,8 @@ const EditProfile:FC<Props> = ({close}) => {
                   <select className="w-full p-3 rounded-lg border border-gray-400" {...field}>
                     <option value="">Select an option</option>
                     {
-                        countries.all.map((item) => (
-                            <option value={item.name} key={item.ioc}>{item.name}</option>
+                        countries.all.map((item, i) => (
+                            <option value={item.name} key={i}>{item.name}</option>
                         ))
                     }
                   </select>

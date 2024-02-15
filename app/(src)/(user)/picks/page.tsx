@@ -1,5 +1,5 @@
-import PicksList from '@/lib/components/modules/picks/picksList'
 import React from 'react'
+import PicksList from '@/lib/components/modules/picks/picksList'
 
 const AnalystPicks = () => {
   return (

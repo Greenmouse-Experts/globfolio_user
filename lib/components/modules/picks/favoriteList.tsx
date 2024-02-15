@@ -8,7 +8,7 @@ import {
   Typography,
   TimelineHeader,
 } from "@/lib/components/ui/TailwindComp";
-import { fetchAllPicks, saveUserPick } from "@/lib/service/api/picksApi";
+import { deleteUserPick, fetchSavePick } from "@/lib/service/api/picksApi";
 import dayjs from "dayjs";
 import ReactCountryFlag from "react-country-flag";
 import {
@@ -20,19 +20,24 @@ import CubeLoader from "../../ui/Loaders/CubeLoader/CubeLoader";
 import { useRouter } from "next/navigation";
 import { FaHeart } from "react-icons/fa6";
 import useAuth from "@/lib/hooks/authUser";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { useMutation } from "@tanstack/react-query";
 const lookup = require("country-code-lookup");
 
-const PicksList = () => {
+const FavoriteList = () => {
   const { userId } = useAuth();
   const [page, setPage] = useState(1);
+  const [{ sliceUp, sliceDown }, setSlice] = useState({
+    sliceDown: 0,
+    sliceUp: 7,
+  });
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const route = useRouter();
-  const handleFetch = async (page: number) => {
+  const handleFetch = async () => {
     setIsLoading(true);
     setPage(page);
-    await fetchAllPicks(page)
+    await fetchSavePick(userId)
       .then((data) => {
         setData(data?.data);
         setIsLoading(false);
@@ -40,29 +45,41 @@ const PicksList = () => {
       .catch((err) => console.log(err));
   };
   useEffect(() => {
-    handleFetch(1);
-  }, []);
+    handleFetch();
+  }, [userId]);
   const gotoNext = () => {
-    handleFetch(page + 1);
+    if (sliceUp + 7 > data.length) {
+      toast.info("There is no next page");
+      return;
+    }
+    setSlice({
+      sliceDown: sliceDown + 7,
+      sliceUp: sliceUp + 7,
+    });
+    setPage(page + 1);
   };
   const gotoPrev = () => {
-    if (page === 1) {
+    if (sliceDown < 7) {
       toast.info("This is the first page");
+      return;
     }
-    handleFetch(page - 1);
+    setSlice({
+      sliceDown: sliceDown - 7,
+      sliceUp: sliceUp - 7,
+    });
   };
   const mutate = useMutation({
-    mutationFn: saveUserPick,
+    mutationFn: deleteUserPick,
     mutationKey: ["saveUserPick"],
   });
-  const addToFavorite = (item: string) => {
+  const removeFromFavorite = (item: string) => {
     const payload = {
       userId: userId,
       stockId: item,
     };
     mutate.mutateAsync(payload, {
       onSuccess: () => {
-        toast.success("Picks has been added to favorites");
+        toast.success("Picks has been removed from favorites");
       },
       onError: (error: any) => {
         toast.error(error.response.data.message);
@@ -108,10 +125,10 @@ const PicksList = () => {
                       <div className="w-full flex relative flex-col gap-1">
                         <Typography
                           placeholder={""}
-                          className="fw-600 syne"
+                          variant="h6"
                           color="blue-gray"
                         >
-                          <p className="fw-600 fs-400 lg:fs-700 lg:w-10/12">{item.intro}</p>
+                          {item.intro}
                         </Typography>
                         <Typography
                           placeholder={""}
@@ -122,12 +139,11 @@ const PicksList = () => {
                           {dayjs(item.createdAt).format("dddd DD, MM YYYY")}
                         </Typography>
                         <div onClick={(e) => e.stopPropagation()}>
-                          <div
-                            className="md:absolute cursor-pointer bottom-1 lg:top-2 right-4 flex items-center gap-x-1"
-                            onClick={() => addToFavorite(item.id)}
-                          >
-                            <FaHeart />
-                            <p className="fs-300 fw-600">Add to Favorites</p>
+                          <div className="md:absolute cursor-pointer bottom-1 lg:top-2 right-4 flex items-center gap-x-1" onClick={() => removeFromFavorite(item.id)}>
+                            <RiDeleteBin6Line />
+                            <p className="fs-300 fw-600">
+                              Remove from Favorites
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -167,4 +183,4 @@ const PicksList = () => {
   );
 };
 
-export default PicksList;
+export default FavoriteList;

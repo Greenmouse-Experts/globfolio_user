@@ -24,7 +24,7 @@ const SubPlanList = () => {
   });
   const subs = data?.data?.filter((where:any) => where.id !== activeSub.planId)
   return (
-    <div className="lg:w-[330px]">
+    <div className="w-[250px] md:w-[330px] lg:w-[330px]">
       {data && !isLoading && (
         <Swiper
         effect={'cards'}

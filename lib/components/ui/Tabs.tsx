@@ -15,7 +15,7 @@ const Tabs: FC<Props> = ({ tabs, broadcastCurrentIndex, type }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navStyle = {
     charts:
-      'bg-[#FFFBF1] p-4 rounded-[10px] flex lg:space-x-2 space-x-2 overflow-x-auto',
+      'bg-gray-100 p-4 rounded-[10px] flex lg:space-x-2 space-x-2 overflow-x-auto',
     norm: 'flex lg:space-x-4 space-x-2 overflow-x-auto',
     '': '-mb-px tab-bar flex lg:space-x-8 space-x-2 overflow-x-auto',
     price: 'flex justify-center lg:space-x-8',
@@ -28,10 +28,10 @@ const Tabs: FC<Props> = ({ tabs, broadcastCurrentIndex, type }) => {
       'whitespace-nowrap text-center cursor-pointer py-[10px] px-6 lg:px-12 fs-500',
   };
   const navActiveClass = {
-    charts: 'bg-[#B3561B] text-white rounded-[10px] duration-100',
-    norm: 'border-b-[4px] text-[#B3561B] border-[#B3561B]',
-    '': 'border-b-[4px] text-[#B3561B] border-[#B3561B]',
-    price: 'bg-[#B3561B] text-white rounded-[10px] duration-100',
+    charts: 'bg-primary text-white rounded-[10px] duration-100',
+    norm: 'border-b-[4px] text-primary border-primary',
+    '': 'border-b-[4px] text-primary border-primary',
+    price: 'bg-primary text-white rounded-[10px] duration-100',
   };
   const navInactiveClass = {
     charts: 'text-[#A6A6A6] bg-[#FAFAFA] hover:text-gray-700',

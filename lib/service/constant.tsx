@@ -30,4 +30,12 @@ export enum HTTP_METHODS {
   // picks
   export const GET_FREE_PICKS = `/stockAdvisory/stockAdvisorysFree`
   export const GET_ALL_PICKS = `/stockAdvisory/stockAdvisorys`
-  // export const GET_SINGLE_PICK = `/stockAdvisory/stockAdvisorys/`
+  export const GET_SINGLE_SAVED_PICK = `/user/stockAdvisory/singleStockAdvisorySave`
+  export const SAVE_PICK =`/user/stockAdvisory/save`
+  export const GET_SAVED_PICK =`/user/stockAdvisory`
+  export const DELETE_SAVED_PICK = `/user/stockAdvisory/delete`
+
+  // notify
+  export const GET_NOTIFY = `/notifications/user`
+  export const MARK_READ = `/notifications/mark-read`
+  export const DELETE_NOTIFY = `/notifications/delete`
