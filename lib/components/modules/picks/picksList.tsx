@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Timeline,
   TimelineItem,
@@ -8,7 +8,6 @@ import {
   Typography,
   TimelineHeader,
 } from "@/lib/components/ui/TailwindComp";
-import { useQuery } from "@tanstack/react-query";
 import { fetchAllPicks } from "@/lib/service/api/picksApi";
 import dayjs from "dayjs";
 import ReactCountryFlag from "react-country-flag";
@@ -16,16 +15,33 @@ import {
   IoCaretBackCircleOutline,
   IoCaretForwardCircleOutline,
 } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const PicksList = () => {
   const [page, setPage] = useState(1);
-  const { data, isLoading, refetch } = useQuery({
-    queryFn: () => fetchAllPicks(page),
-    queryKey: ["allPicks"],
-  });
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const handleFetch = async (page: number) => {
+    setIsLoading(true);
+    setPage(page);
+    await fetchAllPicks(page)
+      .then((data) => {
+        setData(data?.data);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    handleFetch(1);
+  }, []);
   const gotoNext = () => {
-    setPage(2);
-    refetch();
+    handleFetch(page + 1);
+  };
+  const gotoPrev = () => {
+    if (page === 1) {
+      toast.info("This is the first page");
+    }
+    handleFetch(page - 1);
   };
   return (
     <>
@@ -33,8 +49,8 @@ const PicksList = () => {
         {data && !isLoading && (
           <div>
             <Timeline>
-              {data.data.length &&
-                data.data.map((item: any) => (
+              {!!data.length &&
+                data.map((item: any) => (
                   <TimelineItem className="h-28">
                     <TimelineConnector className="!w-[78px]" />
                     <TimelineHeader className="relative rounded-xl border border-blue-gray-50 bg-white py-3 pl-4 pr-8 shadow-lg shadow-blue-gray-900/5">
@@ -78,16 +94,26 @@ const PicksList = () => {
           </div>
         )}
         {data && !isLoading && (
-          <div className="flex justify-end items-center">
+          <div className="flex justify-end items-center gap-x-3">
             <div className="bg-primary rounded-lg p-3 text-white">
               <p className="fw-500">Page {page}</p>
             </div>
-            <div className="flex gap-x-4 items-center">
-              <div className="w-12 h-10 rounded-lg place-center">
-                <IoCaretForwardCircleOutline className="text-xl" />
-              </div>
-              <div>
+            <div className="flex gap-x-2 items-center">
+              <div
+                className={`w-12 h-10 rounded-lg text-white place-center ${
+                  page > 1 ? "bg-primary" : "bg-gray-400"
+                }`}
+                onClick={gotoPrev}
+              >
                 <IoCaretBackCircleOutline className="text-xl" />
+              </div>
+              <div
+                className={`w-12 h-10 rounded-lg text-white place-center ${
+                  page > 0 ? "bg-primary" : "bg-gray-400"
+                }`}
+                onClick={gotoNext}
+              >
+                <IoCaretForwardCircleOutline className="text-xl" />
               </div>
             </div>
           </div>
