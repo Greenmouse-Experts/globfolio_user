@@ -14,12 +14,10 @@ const ActiveSub = () => {
     queryKey: ["sinfetchsub"],
   });
   useEffect(() => {
-    if(activeSub.planId){
       setTimeout(() => {
         refetch();
       }, 4000);
-    }
-  }, [activeSub]);
+  }, []);
 
   return (
     <div className="bg-white shadow p-3">

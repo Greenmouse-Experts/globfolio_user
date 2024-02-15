@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Timeline,
   TimelineItem,
@@ -12,12 +12,21 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchAllPicks } from "@/lib/service/api/picksApi";
 import dayjs from "dayjs";
 import ReactCountryFlag from "react-country-flag";
+import {
+  IoCaretBackCircleOutline,
+  IoCaretForwardCircleOutline,
+} from "react-icons/io5";
 
 const PicksList = () => {
-  const { data, isLoading } = useQuery({
-    queryFn: () => fetchAllPicks(1),
+  const [page, setPage] = useState(1);
+  const { data, isLoading, refetch } = useQuery({
+    queryFn: () => fetchAllPicks(page),
     queryKey: ["allPicks"],
   });
+  const gotoNext = () => {
+    setPage(2);
+    refetch();
+  };
   return (
     <>
       <div>
@@ -66,6 +75,21 @@ const PicksList = () => {
                   </TimelineItem>
                 ))}
             </Timeline>
+          </div>
+        )}
+        {data && !isLoading && (
+          <div className="flex justify-end items-center">
+            <div className="bg-primary rounded-lg p-3 text-white">
+              <p className="fw-500">Page {page}</p>
+            </div>
+            <div className="flex gap-x-4 items-center">
+              <div className="w-12 h-10 rounded-lg place-center">
+                <IoCaretForwardCircleOutline className="text-xl" />
+              </div>
+              <div>
+                <IoCaretBackCircleOutline className="text-xl" />
+              </div>
+            </div>
           </div>
         )}
       </div>
