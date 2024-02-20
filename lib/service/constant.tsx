@@ -1,5 +1,7 @@
-export const BASE_URL = 'https://api.globfolio.com/api'
-export const BASE_UPLOAD = 'https://api.globfolio.com'
+// export const BASE_URL = 'https://api.globfolio.com/api'
+// export const BASE_UPLOAD = 'https://api.globfolio.com'
+export const BASE_URL = 'http://server.globfolio.com/api'
+export const BASE_UPLOAD = 'http://server.globfolio.com'
 
 export enum HTTP_METHODS {
     GET = "GET",
@@ -39,3 +41,8 @@ export enum HTTP_METHODS {
   export const GET_NOTIFY = `/notifications/user`
   export const MARK_READ = `/notifications/mark-read`
   export const DELETE_NOTIFY = `/notifications/delete`
+
+  // chats routes
+  export const GET_MY_GROUPS = `/chat/rooms`
+  export const GET_CHAT_HISTORY = `/chat/history`
+  export const GET_ROOM_MEMBERS = `/chat/room/`

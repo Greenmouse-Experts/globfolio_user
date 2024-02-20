@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import GoogleSignUp from "./GoogleSignUp";
 import { genderOption } from "@/lib/utils/hardData";
+import {countries} from 'country-data-list';
 
 const RegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -238,6 +239,29 @@ const RegisterForm = () => {
             )}
           />
         </div>
+        <div className="lg:w-6/12 lg:pr-4 mt-3 lg:mt-5">
+              <p className="text-[#000000B2] fw-500">Country</p>
+              <Controller
+                name="country"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter your email",
+                  },
+                }}
+                render={({ field }) => (
+                  <select className="w-full p-3 rounded-md border border-gray-400" {...field}>
+                    <option value="">Select an option</option>
+                    {
+                        countries.all.map((item, i) => (
+                            <option value={item.name} key={i}>{item.name}</option>
+                        ))
+                    }
+                  </select>
+                )}
+              />
+            </div>
         <div className="mt-12">
           <Button
             title={isBusy ? <BarsSpinner size={"14"} color="white" /> : "Register"}

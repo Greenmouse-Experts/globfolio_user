@@ -75,7 +75,7 @@ const SubItem: FC<Props> = ({ item }) => {
         </div>
       </div>
     <Modal title="" size="xs" >
-        <PaymentModal name={item.name}/>
+        <PaymentModal close={() => setShowModal(false)} name={item.name}/>
     </Modal>
     </>
   );
