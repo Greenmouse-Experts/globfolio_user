@@ -4,7 +4,7 @@ const IndividualList = () => {
   return (
     <>
         <div>
-            
+            in list
         </div>
     </>
   )

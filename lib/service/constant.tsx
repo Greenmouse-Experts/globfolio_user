@@ -39,3 +39,8 @@ export enum HTTP_METHODS {
   export const GET_NOTIFY = `/notifications/user`
   export const MARK_READ = `/notifications/mark-read`
   export const DELETE_NOTIFY = `/notifications/delete`
+
+  // chats routes
+  export const GET_MY_GROUPS = `/chat/rooms`
+  export const GET_CHAT_HISTORY = `/chat/history`
+  export const GET_ROOM_MEMBERS = `/chat/room/`
