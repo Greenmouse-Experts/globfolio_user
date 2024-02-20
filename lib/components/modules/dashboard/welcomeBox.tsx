@@ -1,11 +1,26 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "@/lib/hooks/authUser";
 import { FaAward } from "react-icons/fa";
 import { formatAsNgnMoney } from "@/lib/utils";
+import useRoutine from "@/lib/hooks/useRoutine";
+import { fetchSingleSubs } from "@/lib/service/api/subApi";
+import { SubItemType } from "@/lib/contracts/subs";
+import dayjs from "dayjs";
 
 const WelcomeBox = () => {
   const { firstName } = useAuth();
+  const { activeSub } = useRoutine();
+  const [subData, setSubData] = useState<SubItemType>();
+  useEffect(() => {
+    if (activeSub.planId) {
+      fetchSingleSubs(activeSub?.planId)
+        .then((res) => {
+          setSubData(res.data);
+        })
+        .catch(() => {});
+    }
+  }, [activeSub]);
   return (
     <div className="p-3">
       <div className="bg-primary rounded-lg">
@@ -21,9 +36,11 @@ const WelcomeBox = () => {
             <FaAward className="text-3xl lg:text-5xl" />
           </div>
           <div>
-            <p className="fw-500 syne lg:text-2xl">Jolly Subscription</p>
+            <p className="fw-500 syne lg:text-2xl">
+              {subData?.name} Subscription
+            </p>
             <p className="fw-500 syne text-lg lg:text-2xl">
-              {formatAsNgnMoney(4000000)}
+              {subData?.amount && formatAsNgnMoney(subData?.amount)}
             </p>
           </div>
         </div>
@@ -31,7 +48,9 @@ const WelcomeBox = () => {
       <div className="pt-4 grid gap-4">
         <div className="flex border-b pb-2">
           <p className="fw-500 w-3/12">Start Date:</p>
-          <p className="fw-500 syne">Tuesday 24, September 2023</p>
+          <p className="fw-500 syne">
+            {dayjs(activeSub.createdAt).format("dddd DD, MMMM YYYY")}
+          </p>
         </div>
         <div className="flex border-b pb-2">
           <p className="fw-500 w-3/12">End Date:</p>
@@ -40,15 +59,14 @@ const WelcomeBox = () => {
         <div className="flex border-b pb-2">
           <p className="fw-500 w-3/12">Access:</p>
           <div className="flex gap-4">
-            <p className="bg-primary fs-500 fw-500 syne px-2 py-1 text-white rounded-lg">
-              Nigeria
-            </p>
-            <p className="bg-primary fs-500 fw-500 syne px-2 py-1 text-white rounded-lg">
-              Ghana
-            </p>
-            <p className="bg-primary fs-500 fw-500 syne px-2 py-1 text-white rounded-lg">
-              South Africa
-            </p>
+            {subData?.analystPickAccess.map((item: string, i: number) => (
+              <p
+                className="bg-primary fs-500 fw-500 syne px-2 py-1 text-white rounded-lg"
+                key={i}
+              >
+                {item}
+              </p>
+            ))}
           </div>
         </div>
       </div>

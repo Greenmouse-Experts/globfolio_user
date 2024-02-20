@@ -5,7 +5,7 @@ import React from 'react'
 const GroupChat = () => {
   return (
     <>
-      <div className='border-2 bg-white flex rounded-[20px] h-[550px]'>
+      <div className='border-2 bg-white flex rounded-[20px] h-[550px] 2xl:h-[600px]  overflow-hidden'>
         <div className='w-[230px]'>
           <ChatMemberList/>
         </div>

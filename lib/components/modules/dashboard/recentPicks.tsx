@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import {
   Timeline,
   TimelineItem,
@@ -8,15 +9,32 @@ import {
   TimelineHeader,
 } from "@/lib/components/ui/TailwindComp";
 import Link from "next/link";
+import { fetchSavePick } from "@/lib/service/api/picksApi";
+import useAuth from "@/lib/hooks/authUser";
 
 const RecentPicks = () => {
+  const { userId } = useAuth();
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const handleFetch = async () => {
+    setIsLoading(true);
+    await fetchSavePick(userId)
+      .then((data) => {
+        setData(data?.data);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    handleFetch();
+  }, [userId]);
   return (
     <>
       <div className="w-full p-4">
         <div className="mb-6 flex items-center justify-between">
         <p className="syne flex fw-500 items-center gap-x-2 text-2xl">
           <span className="w-3 h-3 lg:h-4 mt-[2px] lg:w-4 bg-primary circle block"></span>
-          Recent Picks
+          Favorite Picks
         </p>
         <Link href={'/picks'} className="fw-500 syne underline">View All</Link>
         </div>
