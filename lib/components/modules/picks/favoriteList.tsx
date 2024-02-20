@@ -22,6 +22,7 @@ import { FaHeart } from "react-icons/fa6";
 import useAuth from "@/lib/hooks/authUser";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useMutation } from "@tanstack/react-query";
+import EmptyGif from "../../ui/EmptyState/EmptyGif";
 const lookup = require("country-code-lookup");
 
 const FavoriteList = () => {
@@ -94,6 +95,13 @@ const FavoriteList = () => {
             <CubeLoader size={1.1} />
           </div>
         )}
+        {
+          !isLoading && !data.length && (
+           <div className="py-12">
+             <EmptyGif msg="There are no available picks at the moment, please check back."/>
+           </div>
+          )
+        }
         {data && !isLoading && (
           <div>
             <Timeline>

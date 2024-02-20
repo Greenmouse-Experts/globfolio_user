@@ -10,6 +10,7 @@ import { IoBookmarks } from "react-icons/io5";
 import GroupList from "./groupList";
 import { MdPrivateConnectivity } from "react-icons/md";
 import IndividualList from "./individualList";
+import { IoIosChatbubbles } from "react-icons/io";
 
 const ChatMemberList = () => {
   const [open, setOpen] = React.useState(1);
@@ -19,13 +20,14 @@ const ChatMemberList = () => {
   return (
     <div className="p-4">
       <div>
-        <div>
+        <div className="flex items-center justify-between">
           <p className="fw-600">Chats</p>
+          <IoIosChatbubbles/>
         </div>
         <div className="mt-3">
           <SearchList />
         </div>
-        <div>
+        <div className="mt-3">
           <Accordion placeholder={""} open={open === 1}>
             <AccordionHeader placeholder={""} onClick={() => handleOpen(1)} className="border-none">
               <div className="flex text-gray-700 gap-x-2 items-center fw-600">
@@ -33,7 +35,7 @@ const ChatMemberList = () => {
                 <p className="fs-500">Group Chat</p>
               </div>
             </AccordionHeader>
-            <AccordionBody>
+            <AccordionBody className='pt-0'>
               <GroupList/>
             </AccordionBody>
           </Accordion>
@@ -44,7 +46,7 @@ const ChatMemberList = () => {
                 <p className="fs-500">Private Chat</p>
               </div>
             </AccordionHeader>
-            <AccordionBody>
+            <AccordionBody className={'pt-0'}>
              <IndividualList/>
             </AccordionBody>
           </Accordion>

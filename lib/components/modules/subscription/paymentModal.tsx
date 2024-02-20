@@ -9,22 +9,23 @@ import { toast } from "react-toastify";
 
 interface Props{
     name: string
+    close: () => void
 }
 const PaymentModal:FC<Props> = ({name}) => {
   const { user, userId } = useAuth();
-  const { payInfo } = useRoutine();
+  const { payInfo, saveSub, activeSub } = useRoutine();
   const [isBusy, setIsBusy] = useState(false);
 
   const config = {
     reference: new Date().getTime().toString(),
     email: user.email,
-    amount: payInfo.amount,
+    amount: Math.round(payInfo.amount),
     publicKey: "pk_test_70cf0795ca6e85623f308dd24791ca18064e9986",
   };
   const initializePayment = usePaystackPayment(config);
   // you can call this function anything
   const onSuccess = (reference: any) => {
-    console.log(reference);
+    setIsBusy(true)
     const payload = {
       userId: userId,
       reference: reference.reference,
@@ -44,8 +45,13 @@ const PaymentModal:FC<Props> = ({name}) => {
     mutationFn: verifyUpgradeSub,
     mutationKey: ["verifySub"],
     onSuccess: (data) => {
-      console.log(data);
+      setIsBusy(false)
+      saveSub({
+        ...activeSub,
+        planId: payInfo.plandId
+      })
       toast.success("Subscription Upgraded Successfully");
+      close()
     },
     onError: (error:any) => {
       toast.error(error.response.data.message)
@@ -63,7 +69,7 @@ const PaymentModal:FC<Props> = ({name}) => {
               initializePayment({onSuccess, onClose});
             }}
           >
-            Continue
+            {isBusy? 'Initializing...' : 'Continue'}
           </button>
         </div>
       </div>
