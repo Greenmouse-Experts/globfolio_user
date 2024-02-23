@@ -20,7 +20,7 @@ const RegisterUser = () => {
             />
           </Link>
           
-          <div className="lg:w-[750px] mx-auto bg-white lg:px-16 p-6">
+          <div className="lg:w-[750px] my-36 lg:my-0 mx-auto bg-white lg:px-16 p-6">
           <Image
               src='https://res.cloudinary.com/greenmouse-tech/image/upload/v1689001814/globfolio/Group_48319_zrfe2h.png'
               alt="logo"

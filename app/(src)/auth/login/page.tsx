@@ -8,7 +8,7 @@ import LoginForm from "@/lib/components/modules/auth/Loginform";
 const LoginPage = () => {
   return (
     <>
-      <div className="bg-primary h-screen">
+      <div className="bg-primary lg:h-screen">
         <div className="w-full h-full bg-login">
         <div className="box h-full place-center">
           <Link href="/" className="lg:hidden absolute top-6 left-2 lg:left-6">
@@ -21,7 +21,7 @@ const LoginPage = () => {
             />
           </Link>
           
-          <div className="lg:w-[550px] mx-auto bg-white lg:px-16 p-6">
+          <div className="lg:w-[550px] my-36 lg:my-0 mx-auto bg-white lg:px-16 p-6">
           <Image
               src='https://res.cloudinary.com/greenmouse-tech/image/upload/v1689001814/globfolio/Group_48319_zrfe2h.png'
               alt="logo"
