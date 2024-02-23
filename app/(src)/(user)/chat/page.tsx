@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import io from 'socket.io-client';
 
 
-const socket = io('http://server.globfolio.com/');
+const socket = io('https://server.globfolio.com/');
 const GroupChat = () => {
   const [activeChat, setActiveChat] = useState<any>()
   const selectActive = (item:any) => {
