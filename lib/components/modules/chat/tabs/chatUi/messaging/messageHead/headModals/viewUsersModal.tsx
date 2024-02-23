@@ -43,7 +43,7 @@ const ViewUsersModal: FC<Props> = ({ id }) => {
             </div>
             {item.ismoderator && (
               <div className="pr-5">
-                <MdOutlineMarkUnreadChatAlt className="text-2xl" />
+                <MdOutlineMarkUnreadChatAlt className="text-2xl cursor-pointer" />
               </div>
             )}
           </div>
