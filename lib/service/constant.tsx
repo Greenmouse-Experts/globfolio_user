@@ -46,3 +46,4 @@ export enum HTTP_METHODS {
   export const GET_MY_GROUPS = `/chat/rooms`
   export const GET_CHAT_HISTORY = `/chat/history`
   export const GET_ROOM_MEMBERS = `/chat/room/`
+  export const JOIN_GROUP = `chat/room`

@@ -1,0 +1,30 @@
+export interface UserItemType {
+  aboutUs: string | null;
+  app: string | null;
+  apple_id: string | null;
+  country: string;
+  createdAt: string;
+  email: string;
+  email_verify: boolean;
+  expiredAt: string | null;
+  facebook_id: string | null;
+  fcmtoken: string | null;
+  fullname: string;
+  gender: string;
+  google_id: string | null;
+  hasActiveSubscription: boolean;
+  id: string;
+  isActive: boolean;
+  isSuspended: boolean;
+  password: string;
+  password_token: string | null;
+  phone_no: string;
+  picture: string | null;
+  planId: string;
+  reason_for_suspension: string | null;
+  referralId: string;
+  token: string | null;
+  updatedAt: string;
+  userType: string;
+  username: string;
+}
