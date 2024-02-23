@@ -38,3 +38,14 @@ export const getChatHistory = async (payload:any) => {
       .get(`${ENDPOINT.GET_CHAT_HISTORY}`)
       .then((response) => response.data);
   };
+  export const joinChatGroup = async (payload:any) => {
+    return axios
+      .post(`${ENDPOINT.JOIN_GROUP}/${payload}/join`)
+      .then((response) => response.data);
+  };
+
+  export const getChatRoomUsers = async (payload:any) => {
+    return axios
+      .get(`${ENDPOINT.JOIN_GROUP}/${payload}/suscribers`)
+      .then((response) => response.data);
+  };

@@ -1,16 +1,26 @@
+"use client"
 import ChatMemberList from '@/lib/components/modules/chat/tabs/chatList'
 import ChatUiContainer from '@/lib/components/modules/chat/tabs/chatUi'
-import React from 'react'
+import React, { useState } from 'react'
+import io from 'socket.io-client';
 
+
+const socket = io('http://server.globfolio.com/');
 const GroupChat = () => {
+  const [activeChat, setActiveChat] = useState<any>()
+  const selectActive = (item:any) => {
+    setActiveChat(item)
+    // dispatch(resetMessages())
+  }
+
   return (
     <>
-      <div className='border-2 bg-white flex rounded-[20px] h-[550px] 2xl:h-[600px]  overflow-hidden'>
-        <div className='w-[230px]'>
-          <ChatMemberList/>
+      <div className='border-2 bg-white lg:flex rounded-[20px] pb-3 lg:pb-0 h-auto lg:h-[550px] 2xl:h-[620px]  overflow-hidden'>
+        <div className='lg:w-[230px]'>
+          <ChatMemberList select={selectActive} item={activeChat}/>
         </div>
         <div className='lg:w-[calc(100%_-_230px)] bg-gray-50 h-full'>
-          <ChatUiContainer/>
+          <ChatUiContainer socket={socket} select={selectActive} item={activeChat}/>
         </div>
       </div>
     </>

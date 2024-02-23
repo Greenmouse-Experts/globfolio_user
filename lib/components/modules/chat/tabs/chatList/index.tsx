@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { FC } from "react";
 import SearchList from "./searchList";
 import {
   Accordion,
@@ -12,7 +12,11 @@ import { MdPrivateConnectivity } from "react-icons/md";
 import IndividualList from "./individualList";
 import { IoIosChatbubbles } from "react-icons/io";
 
-const ChatMemberList = () => {
+interface Props{
+  item: any;
+  select: (value: any) => void;
+}
+const ChatMemberList:FC<Props> = ({item, select}) => {
   const [open, setOpen] = React.useState(1);
 
   const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
@@ -36,7 +40,7 @@ const ChatMemberList = () => {
               </div>
             </AccordionHeader>
             <AccordionBody className='pt-0'>
-              <GroupList/>
+              <GroupList select={select} item={item}/>
             </AccordionBody>
           </Accordion>
           <Accordion placeholder={""} open={open === 2}>

@@ -11,6 +11,7 @@ import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import { RouteType, Routes } from "./routes";
 import LogoutModal from "../../modules/auth/LogoutModal";
 import logo from "../../../../public/logo.svg";
+import { useMediaQuery } from '@react-hook/media-query';
 
 interface Props {
   setToggled: (value: boolean | ((prevVar: boolean) => boolean)) => void;
@@ -19,15 +20,16 @@ interface Props {
 const SidebarLayout: FC<Props> = ({ setToggled, toggled }) => {
   const path = usePathname();
   const { Modal, setShowModal } = useModal();
+  const matches = useMediaQuery('(max-width: 960px)');
 
   return (
     <Suspense>
       <div className="left-0 top-0 fixed overflow-y-hidden index-30  bg-primary text-white">
         <Sidebar
           customBreakPoint="960px"
-          className="h-screen overflow-y-hidden scroll-pro pb-4 fs-700 fw-500 px-4"
+          className={`h-screen overflow-y-hidden scroll-pro pb-4 fs-700 fw-500 px-4 ps-broken lg:!left-0`}
           backgroundColor=""
-           onClick={() => setToggled(false)}
+          onClick={() => setToggled(false)}
         toggled={toggled}
         >
           <div className="flex justify-center py-2 lg:py-2 lg:pb-8 items-center">
@@ -92,7 +94,7 @@ const SidebarLayout: FC<Props> = ({ setToggled, toggled }) => {
               component={<Link href={"/settings"} />}
               icon={<BsGear className="text-xl" />}
               className="mt-12"
-              active={path === '/settings' && true}
+              active={path === "/settings" && true}
             >
               <p className="fs-400">Settings</p>
             </MenuItem>
