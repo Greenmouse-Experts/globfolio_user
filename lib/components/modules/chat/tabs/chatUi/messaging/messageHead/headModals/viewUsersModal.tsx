@@ -7,12 +7,24 @@ import { MdOutlineMarkUnreadChatAlt } from "react-icons/md";
 
 interface Props {
   id: string;
+  select: (value: any) => void;
+  close: () => void
 }
-const ViewUsersModal: FC<Props> = ({ id }) => {
+const ViewUsersModal: FC<Props> = ({ id, select, close }) => {
   const { isLoading, data } = useQuery({
     queryFn: () => getChatRoomUsers(id),
     queryKey: ["chatroom-users"],
   });
+  const selectUser = (item: ChatRoomMemberList) => {
+    const payload = {
+      id: item.user.id,
+      fullname: item.user.fullname,
+      img: item.user.picture,
+      access: null
+    };
+    select(payload);
+    close()
+  };
   return (
     <div className="">
       <div className="h-[400px] grid gap-2 p-2 overflow-y-auto">
@@ -22,10 +34,10 @@ const ViewUsersModal: FC<Props> = ({ id }) => {
           </div>
         )}
         {data?.data.map((item: ChatRoomMemberList) => (
-          <div className="shadow p-2 flex justify-between">
+          <div className="shadow p-2 flex justify-between" key={item.id}>
             <div>
               <div>
-                <p>{item.user.fullname}</p>
+                <p>{item?.user?.fullname}</p>
               </div>
               <div>
                 <p>
@@ -41,11 +53,10 @@ const ViewUsersModal: FC<Props> = ({ id }) => {
                 </p>
               </div>
             </div>
-            {item.ismoderator && (
-              <div className="pr-5">
-                <MdOutlineMarkUnreadChatAlt className="text-2xl cursor-pointer" />
-              </div>
-            )}
+
+            <div className="pr-5" onClick={() => selectUser(item)}>
+              <MdOutlineMarkUnreadChatAlt className="text-2xl cursor-pointer" />
+            </div>
           </div>
         ))}
       </div>

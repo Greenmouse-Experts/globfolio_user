@@ -1,6 +1,7 @@
 "use client"
 import ChatMemberList from '@/lib/components/modules/chat/tabs/chatList'
 import ChatUiContainer from '@/lib/components/modules/chat/tabs/chatUi'
+import useChatStore from '@/lib/store/chatStore';
 import React, { useState } from 'react'
 import io from 'socket.io-client';
 
@@ -8,9 +9,10 @@ import io from 'socket.io-client';
 const socket = io('https://server.globfolio.com/');
 const GroupChat = () => {
   const [activeChat, setActiveChat] = useState<any>()
+  const clearChat = useChatStore((state) => state.clearChat)
   const selectActive = (item:any) => {
     setActiveChat(item)
-    // dispatch(resetMessages())
+    clearChat()
   }
 
   return (
