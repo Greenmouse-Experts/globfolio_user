@@ -54,8 +54,6 @@ const EditProfile:FC<Props> = ({close}) => {
     },
   });
   const onSubmit = async (data: any) => {
-    console.log(data);
-    
     setIsBusy(true);
     const payload = {
       fullname: `${data.firstname} ${data.lastname}`,

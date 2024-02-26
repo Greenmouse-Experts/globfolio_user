@@ -14,7 +14,7 @@ const GroupList: FC<Props> = ({ item, select }) => {
     queryKey: ["groups"],
   });
   return (
-    <div className="flex gap-x-3 w-auto overflow-x-auto scroll-pro lg:grid gap-1">
+    <div className="flex gap-x-3 w-auto overflow-x-auto scroll-chat lg:grid gap-1 lg:max-h-[400px] overflow-y-auto">
       {isLoading && (
         <p className="fs-400 fw-500 py-4 text-center">Loading...</p>
       )}

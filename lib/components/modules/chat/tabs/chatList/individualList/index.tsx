@@ -21,7 +21,7 @@ const IndividualList: FC<Props> = ({ select, item }) => {
           recent?.map((items: any, i:number) => (
             <li
               key={i}
-              className={`flex w-[120px] border lg:border-0  shrink-0 lg:w-auto gap-x-1 cursor-pointer hover:bg-gray-200 rounded-md p-2 ${item?.name === items?.scontact?.fullname && 'bg-gray-200'}`}
+              className={`flex w-[180px] border lg:border-0  shrink-0 lg:w-auto gap-x-1 cursor-pointer hover:bg-gray-200 rounded-md p-2 ${item?.name === items?.scontact?.fullname && 'bg-gray-200'}`}
               onClick={() =>
                 select({
                   fullname: items.scontact.fullname,

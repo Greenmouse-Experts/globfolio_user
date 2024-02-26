@@ -28,9 +28,9 @@ const ChatMemberList:FC<Props> = ({item, select}) => {
           <p className="fw-600">Chats</p>
           <IoIosChatbubbles/>
         </div>
-        <div className="mt-3">
+        {/* <div className="mt-3">
           <SearchList />
-        </div>
+        </div> */}
         <div className="mt-3">
           <Accordion placeholder={""} open={open === 1}>
             <AccordionHeader placeholder={""} onClick={() => handleOpen(1)} className="border-none">

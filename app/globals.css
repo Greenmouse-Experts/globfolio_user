@@ -138,6 +138,10 @@ input[type="checkbox"]:checked {
   width: 0px;
   height: 0px;
 }
+.scroll-chat::-webkit-scrollbar {
+  width: 5px;
+  height: 0px;
+}
 .ps-sidebar-root{
   background: #0B1B2B;
 }

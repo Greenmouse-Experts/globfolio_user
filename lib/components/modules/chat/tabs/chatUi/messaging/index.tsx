@@ -24,6 +24,7 @@ const MessagingUi: FC<Props> = ({ socket, item, select }) => {
           createdAt: data.msg.createdAt,
           id: data.msg.id,
           files: data.msg.files,
+          reply: data.msg.areplyTo,
         }
         setNewMsg(add)
     });
