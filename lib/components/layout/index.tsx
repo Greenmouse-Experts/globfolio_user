@@ -50,7 +50,28 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
                 <div className="flex gap-x-5 items-center">
                   {/* <NotifyDrop/> */}
                   <div className="flex gap-x-4 items-center">
-                    <ProfileAvatar url={user.image} name={user.name} size={44} font={17}/>
+                    
+                    <Menu placement="bottom-start">
+                        <MenuHandler>
+                          <Button placeholder={''} className="p-0 m-0 bg-transparent !shadow-none">
+                          <ProfileAvatar url={user.image} name={user.name} size={44} font={17}/>
+                          </Button>
+                        </MenuHandler>
+                        <MenuList placeholder={''} className="index-30 text-black w-44">
+                          <MenuItem placeholder={''} className="flex gap-x-2 items-center fw-500">
+                            <BsGear className="text-2xl" />
+                            Settings
+                          </MenuItem>
+                          <MenuItem
+                          placeholder={''}
+                            className="flex gap-x-2 items-center fw-500"
+                            onClick={() => setShowModal(true)}
+                          >
+                            <IoLogOutOutline className="text-2xl" />
+                            Logout
+                          </MenuItem>
+                        </MenuList>
+                      </Menu>
                     <div className="hidden lg:flex gap-x-4 items-center cursor-pointer">
                       <p className="fw-500">{user.name}</p>
                       <Menu placement="bottom-start">

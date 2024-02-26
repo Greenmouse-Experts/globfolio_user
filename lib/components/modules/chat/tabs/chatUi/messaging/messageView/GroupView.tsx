@@ -16,6 +16,9 @@ import { BsCheck2All, BsCheckAll } from "react-icons/bs";
 import { FcCancel } from "react-icons/fc";
 import { isFile, isImage, isLink } from "@/lib/utils/formatHelp";
 import useChatStore from "@/lib/store/chatStore";
+import { delChatMgs } from "@/lib/service/api/chatApi";
+import { toast } from "react-toastify";
+import ReusableModal from "@/lib/components/ui/ReusableModal";
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -39,7 +42,6 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
   const getMessages = () => {
     socket.on("chatroom_messages", (data: any) => {
       if (data.msgs) {
-        console.log(data);
         const needed = data?.msgs.map(
           ({
             sender,
@@ -115,29 +117,23 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
     setSelectedItem(item.id);
     showDelete(true);
   };
-  // const deleteMsg = async (item: any) => {
-  //   console.log(item);
-  //   const payload = {
-  //     message_id: item,
-  //     chatroom_id: roomId,
-  //   };
-  //   await delChat(payload)
-  //     .then((res: any) => {
-  //       if (res.isSuccess) {
-  //         toast.success(res.data.message);
-  //         filterDeleted(item);
-  //         showDelete(false);
-  //       } else {
-  //         toast.error(res.data.message);
-  //       }
-  //     })
-  //     .catch((err) => {});
-  // };
+  const deleteMsg = async (item: any) => {
+    const payload = {
+      message_id: item,
+      chatroom_id: roomId,
+    };
+    await delChatMgs(payload)
+      .then((res: any) => {
+          toast.success(res.message);
+          filterDeleted(payload.message_id);
+          showDelete(false);
+      })
+      .catch((err) => {});
+  };
   const filterDeleted = (item: any) => {
     const mgs = [...myMsg];
     const filtered = mgs.filter((where) => where.id !== item);
     addChat(filtered);
-    //   dispatch(saveInitailMsg(filtered));
   };
 
   const viewRef = useRef<HTMLDivElement | null>(null);
@@ -328,14 +324,14 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
         )}
       </div>
       <Delete title="" size="md">
-        <></>
-        {/* <ReusableModal
+        <ReusableModal
         title="Are you sure you want to delete this chat"
         cancelTitle="No, Back"
         actionTitle="Yes, Delete"
         action={() => deleteMsg(selectedItem)}
         closeModal={() => showDelete(false)}
-      /> */}
+        isBusy={false}
+      />
       </Delete>
     </>
   );

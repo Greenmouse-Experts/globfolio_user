@@ -79,14 +79,6 @@ const MessagingInput: FC<Props> = ({
   const sendFiles = (val: string) => {
     if (sendFile) {
       if (item.userId) {
-        console.log({
-          chatroomId: item.id,
-          userId: id,
-          reload_messages: false,
-          message: `${val}`,
-          files: [sendFile],
-        });
-
         socket.emit("chatroom_listen", {
           chatroomId: item.id,
           userId: id,

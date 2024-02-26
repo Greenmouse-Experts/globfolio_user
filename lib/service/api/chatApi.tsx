@@ -55,3 +55,9 @@ export const getChatHistory = async (payload:any) => {
       .get(`${ENDPOINT.JOIN_GROUP}/${payload}/files`)
       .then((response) => response.data);
   };
+
+  export const delChatMgs = async (payload:any) => {
+    return axios
+      .delete(`${ENDPOINT.DELETE_MESSAGES}`, { data: payload })
+      .then((response) => response.data);
+  };

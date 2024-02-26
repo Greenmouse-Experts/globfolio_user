@@ -32,7 +32,6 @@ const MessagingView: FC<Props> = ({ socket, roomId, item, respond }) => {
         userId: id,
         reload_messages: true,
       };
-      console.log(data);
       socket.emit("chatroom_listen", data);
       setLoading(false);
     } else {

@@ -38,6 +38,7 @@
     "react-paystack": "^5.0.0",
     "react-phone-number-input": "^3.3.9",
     "react-pro-sidebar": "^1.1.0",
+    "react-spinners": "^0.13.8",
     "react-toastify": "^10.0.4",
     "socket.io-client": "^4.7.4",
     "swiper": "^11.0.6",

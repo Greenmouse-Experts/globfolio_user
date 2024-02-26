@@ -11,7 +11,7 @@ interface Props{
     name: string
     close: () => void
 }
-const PaymentModal:FC<Props> = ({name}) => {
+const PaymentModal:FC<Props> = ({name, close}) => {
   const { user, userId } = useAuth();
   const { payInfo, saveSub, activeSub } = useRoutine();
   const [isBusy, setIsBusy] = useState(false);
@@ -48,14 +48,13 @@ const PaymentModal:FC<Props> = ({name}) => {
       setIsBusy(false)
       saveSub({
         ...activeSub,
-        planId: payInfo.plandId
+        planId: payInfo?.plandId
       })
       toast.success("Subscription Upgraded Successfully");
       close()
     },
     onError: (error:any) => {
       toast.error(error.response.data.message)
-      console.log(error);
     },
   });
   return (

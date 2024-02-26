@@ -49,12 +49,12 @@ const WelcomeBox = () => {
         <div className="flex border-b pb-2">
           <p className="fw-500 w-3/12">Start Date:</p>
           <p className="fw-500 syne">
-            {dayjs(activeSub.createdAt).format("dddd DD, MMMM YYYY")}
+            {activeSub.createdAt && dayjs(activeSub.createdAt).format("dddd DD, MMMM YYYY")}
           </p>
         </div>
         <div className="flex border-b pb-2">
-          <p className="fw-500 w-3/12">End Date:</p>
-          <p className="fw-500 syne">Tuesday 24, October 2024</p>
+          <p className="fw-500 w-3/12">Duration:</p>
+          <p className="fw-500 syne">{subData && `${subData.duration} Months`}</p>
         </div>
         <div className="flex border-b pb-2">
           <p className="fw-500 w-3/12">Access:</p>
