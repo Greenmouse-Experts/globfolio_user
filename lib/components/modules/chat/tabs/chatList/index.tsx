@@ -51,7 +51,7 @@ const ChatMemberList:FC<Props> = ({item, select}) => {
               </div>
             </AccordionHeader>
             <AccordionBody className={'pt-0'}>
-             <IndividualList/>
+             <IndividualList select={select} item={item}/>
             </AccordionBody>
           </Accordion>
         </div>

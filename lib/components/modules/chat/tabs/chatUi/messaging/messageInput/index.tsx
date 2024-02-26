@@ -4,6 +4,8 @@ import useAuth from "@/lib/hooks/authUser";
 import useDialog from "@/lib/hooks/useDialog";
 import PreviewModal from "./modals/previewModal";
 import { RiAttachment2 } from "react-icons/ri";
+import { AiOutlineFileText } from "react-icons/ai";
+import { BiSolidImageAdd } from "react-icons/bi";
 
 interface Props {
   socket: any;
@@ -37,6 +39,19 @@ const MessagingInput: FC<Props> = ({
       covertFile(selectedFile);
       setShowAttach(false);
     }
+  };
+  const handleFileInput2 = (e: any) => {
+    e.preventDefault();
+    setShowModal(true);
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const imageUrl = URL.createObjectURL(selectedFile);
+      setInputImage(selectedFile);
+      setSelectedImage(imageUrl);
+      covertFile(selectedFile);
+      setShowAttach(false);
+    }
+    setFileMessage(true)
   };
   const sendMessage = (e: any) => {
     e.preventDefault();
@@ -139,7 +154,7 @@ const MessagingInput: FC<Props> = ({
           setMessage={setMessage}
         />
         <div className="relative">
-          {/* {showAttach && (
+          {showAttach && (
               <div className="absolute -top-[108px] -left-[125px] bg-white p-6 w-40 rounded-xl shadow-lg">
                 <div>
                   <p className="relative flex gap-x-1 cursor-pointer hover:text-gray-600 items-center text-black fw-500">
@@ -164,7 +179,7 @@ const MessagingInput: FC<Props> = ({
                   </p>
                 </div>
               </div>
-            )} */}
+            )}
           <RiAttachment2
             className="text-2xl text-primary"
             onClick={() => setShowAttach(!showAttach)}

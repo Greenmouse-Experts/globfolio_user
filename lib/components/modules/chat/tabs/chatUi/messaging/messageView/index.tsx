@@ -63,7 +63,11 @@ const MessagingView: FC<Props> = ({ socket, roomId, item, respond }) => {
     clearMsg()
     setChecking(true)
     setShowError(false);
-    openGroup(item.id);
+    if(item.access){
+      openGroup(item.id);
+    }else{
+      selectConnect()
+    }
   }, [item]);
   return (
     <>

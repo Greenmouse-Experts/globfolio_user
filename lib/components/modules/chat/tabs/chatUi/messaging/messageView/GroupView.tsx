@@ -31,19 +31,13 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
   const chatMsgs = useChatStore((state) => state.chat);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [newMsg, setNewMsg] = useState<any>();
-  // const dispatch = useAppDispatch();
-  // const [delChat] = useLazyDeleteChatMsgQuery();
   const [reply, setReply] = useState(false);
   const [replyItem, setReplyItem] = useState<any>();
   const [selectedItem, setSelectedItem] = useState<any>();
   const { Dialog: Delete, setShowModal: showDelete } = useDialog();
   // Runs whenever a socket event is recieved from the server
   const getMessages = () => {
-    console.log("i started");
-
     socket.on("chatroom_messages", (data: any) => {
-      console.log("data im supposed", data);
-
       if (data.msgs) {
         console.log(data);
         const needed = data?.msgs.map(
@@ -162,7 +156,7 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
                 className={`flex h-auto ${item.sender === id && "justify-end"}`}
               >
                 <div
-                  className={`mt-1 lg:mt-2 p-2 lg:p-4 pt-3 max-h-[400px]  lg:max-w-[425px] 2xl:max-w-[500px] ${
+                  className={`mt-1 lg:mt-2 p-2 lg:p-4 pt-3  lg:max-w-[425px] 2xl:max-w-[500px] ${
                     item.sender === id
                       ? "bg-primary text-white rounded-l-[15px] rounded-b-[15px]"
                       : "bg-blue-100 rounded-b-[15px] rounded-r-[15px]"
@@ -226,13 +220,13 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
                   )}
                   <div>
                     {!!item?.files?.length && isImage(item.files[0]) ? (
-                      <div>
+                      <div className="">
                         <Image
                           src={item.files[0]}
                           alt="msg"
                           width={300}
                           height={400}
-                          className="w-48"
+                          className="w-48 h-auto object-cover"
                         />
                       </div>
                     ) : isFile(item.files[0]) ? (
@@ -304,7 +298,7 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
                       alt="msg"
                       width={300}
                       height={400}
-                      className="w-48"
+                      className="w-48 h-auto"
                     />
                   </div>
                 ) : (

@@ -49,3 +49,9 @@ export const getChatHistory = async (payload:any) => {
       .get(`${ENDPOINT.JOIN_GROUP}/${payload}/suscribers`)
       .then((response) => response.data);
   };
+
+  export const getChatRoomFiles = async (payload:any) => {
+    return axios
+      .get(`${ENDPOINT.JOIN_GROUP}/${payload}/files`)
+      .then((response) => response.data);
+  };
