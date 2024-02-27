@@ -48,3 +48,6 @@ export enum HTTP_METHODS {
   export const GET_ROOM_MEMBERS = `/chat/room/`
   export const JOIN_GROUP = `chat/room`
   export const DELETE_MESSAGES = `/chat/room/message`
+
+  // get analytics
+  export const GET_CHARTS = '/chat/room/metric'

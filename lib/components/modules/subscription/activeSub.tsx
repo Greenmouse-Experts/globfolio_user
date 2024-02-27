@@ -43,7 +43,7 @@ const ActiveSub = () => {
             </div>
             <div className="mt-1 flex gap-x-3 items-center">
               <p className="fw-500 fs-400">Expires At: </p>
-              <p>{activeSub?.expiredAt === null ? "N/A" : "30 Sep 2024"}</p>
+              <p>{activeSub?.expiredAt === null ? "Unlimited" : "30 Sep 2024"}</p>
             </div>
             <div className="grid gap-3 mt-2">
             {

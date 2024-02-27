@@ -19,7 +19,7 @@ const PaymentModal:FC<Props> = ({name, close}) => {
   const config = {
     reference: new Date().getTime().toString(),
     email: user.email,
-    amount: Math.round(payInfo.amount),
+    amount: Math.round(payInfo.amount) * 100,
     publicKey: "pk_test_70cf0795ca6e85623f308dd24791ca18064e9986",
   };
   const initializePayment = usePaystackPayment(config);
