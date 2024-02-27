@@ -43,7 +43,8 @@ const EditProfile:FC<Props> = ({close}) => {
         ...user,
         phone: data.data.phone_no,
         country: data.data.country,
-        name: data.data.fullname
+        name: data.data.fullname,
+        gender: data.data.gender
       })
       setIsBusy(false);
       close();

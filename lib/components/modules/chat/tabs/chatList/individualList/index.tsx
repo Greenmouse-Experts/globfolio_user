@@ -17,7 +17,7 @@ const IndividualList: FC<Props> = ({ select, item }) => {
     <>
       <div>
         {!isLoading &&
-          recent.length &&
+          !!recent.length &&
           recent?.map((items: any, i:number) => (
             <li
               key={i}
@@ -26,7 +26,10 @@ const IndividualList: FC<Props> = ({ select, item }) => {
                 select({
                   fullname: items.scontact.fullname,
                   id: items.scontact.id,
-                  access: null
+                  access: null,
+                  img:  items?.scontact?.picture
+                  ? items.scontact.picture.secure_url
+                  : "https://res.cloudinary.com/greenmouse-tech/image/upload/v1693229127/globfolio/Group_48368_1_y0m8ah.png"
                 })
               }
             >
