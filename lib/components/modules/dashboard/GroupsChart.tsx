@@ -5,93 +5,114 @@ import {
   CardHeader,
   Typography,
 } from "@/lib/components/ui/TailwindComp";
+import { getChart } from "@/lib/service/api/routineApi";
+import { useQuery } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import { BsStack } from "react-icons/bs";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const chartConfig = {
-  type: "bar",
-  height: 240,
-  series: [
-    {
-      name: "Members",
-      data: [50, 40, 300, 320, 500],
-    },
-  ],
-  options: {
-    chart: {
-      toolbar: {
-        show: false,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    colors: ["#020617"],
-    plotOptions: {
-      bar: {
-        columnWidth: "40%",
-        borderRadius: 2,
-      },
-    },
-    xaxis: {
-      axisTicks: {
-        show: false,
-      },
-      axisBorder: {
-        show: false,
-      },
-      labels: {
-        style: {
-          colors: "#616161",
-          fontSize: "12px",
-          fontFamily: "inherit",
-          fontWeight: 400,
-        },
-      },
-      categories: [
-        "Jumbo Crew",
-        "May Boom",
-        "Aso Charts",
-        "Lumbo Jack",
-        "Augument Rake",
-      ],
-    },
-    yaxis: {
-      labels: {
-        style: {
-          colors: "#616161",
-          fontSize: "12px",
-          fontFamily: "inherit",
-          fontWeight: 400,
-        },
-      },
-    },
-    grid: {
-      show: true,
-      borderColor: "#dddddd",
-      strokeDashArray: 5,
-      xaxis: {
-        lines: {
-          show: true,
-        },
-      },
-      padding: {
-        top: 5,
-        right: 20,
-      },
-    },
-    fill: {
-      opacity: 0.8,
-    },
-    tooltip: {
-      theme: "dark",
-    },
-  },
-};
 
+interface ChartProps{
+    group_name: string,
+    member_no: number
+}
 export default function TopGroupsChart() {
+  // const data = [] as ChartProps[]
+  const {data, isLoading} = useQuery({
+    queryKey: ['chartData'],
+    queryFn: getChart
+  })
+  const [names, setNames] = useState<string[]>([]);
+  const [values, setValues] = useState<number[]>([]);
+  useEffect(() => {
+    if (data) {
+      const name = [] as string[];
+      const vals = [] as number[]
+      data.metrics.forEach((item:any) => {
+          name.push(item.name);
+          vals.push(item.messages)
+      });
+      setNames(name);
+      setValues(vals)
+    }
+  }, [data]);
+  
+  const chartConfig = {
+    type: "bar",
+    height: 240,
+    series: [
+      {
+        name: "Members",
+        data: values,
+      },
+    ],
+    options: {
+      chart: {
+        toolbar: {
+          show: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      colors: ["#020617"],
+      plotOptions: {
+        bar: {
+          columnWidth: "40%",
+          borderRadius: 2,
+        },
+      },
+      xaxis: {
+        axisTicks: {
+          show: false,
+        },
+        axisBorder: {
+          show: false,
+        },
+        labels: {
+          style: {
+            colors: "#616161",
+            fontSize: "12px",
+            fontFamily: "inherit",
+            fontWeight: 400,
+          },
+        },
+        categories: names,
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: "#616161",
+            fontSize: "12px",
+            fontFamily: "inherit",
+            fontWeight: 400,
+          },
+        },
+      },
+      grid: {
+        show: true,
+        borderColor: "#dddddd",
+        strokeDashArray: 5,
+        xaxis: {
+          lines: {
+            show: true,
+          },
+        },
+        padding: {
+          top: 5,
+          right: 20,
+        },
+      },
+      fill: {
+        opacity: 0.8,
+      },
+      tooltip: {
+        theme: "dark",
+      },
+    },
+  };
   return (
     <Card placeholder={""}>
       <CardHeader
@@ -119,7 +140,7 @@ export default function TopGroupsChart() {
         </div>
       </CardHeader>
       <CardBody placeholder={""} className="px-2 pb-0">
-        <Chart {...chartConfig} type="bar" width={'100%'} height={'300px'} />
+       {data && <Chart {...chartConfig} type="bar" width={'100%'} height={'300px'} />}
       </CardBody>
     </Card>
   );

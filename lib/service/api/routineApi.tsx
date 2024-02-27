@@ -46,3 +46,9 @@ export const deleteNotify = async (id: string) => {
     .delete(`${ENDPOINT.DELETE_NOTIFY}/${id}`)
     .then((response) => response.data);
 };
+
+export const getChart = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_CHARTS}`)
+    .then((response) => response.data);
+};
