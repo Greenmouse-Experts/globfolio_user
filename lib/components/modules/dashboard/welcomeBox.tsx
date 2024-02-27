@@ -12,8 +12,9 @@ const WelcomeBox = () => {
   const { firstName } = useAuth();
   const { activeSub } = useRoutine();
   const [subData, setSubData] = useState<SubItemType>();
+
   useEffect(() => {
-    if (activeSub.planId) {
+    if (activeSub?.planId) {
       fetchSingleSubs(activeSub?.planId)
         .then((res) => {
           setSubData(res.data);
@@ -40,7 +41,11 @@ const WelcomeBox = () => {
               {subData?.name} Subscription
             </p>
             <p className="fw-500 syne text-lg lg:text-2xl">
-              {subData?.amount && formatAsNgnMoney(subData?.amount)}
+              {subData?.amount
+                ? subData?.amount === 0
+                  ? "₦0.00"
+                  : formatAsNgnMoney(subData?.amount)
+                : "₦0.00"}
             </p>
           </div>
         </div>
@@ -49,12 +54,19 @@ const WelcomeBox = () => {
         <div className="flex border-b pb-2">
           <p className="fw-500 w-3/12">Start Date:</p>
           <p className="fw-500 syne">
-            {activeSub.createdAt && dayjs(activeSub.createdAt).format("dddd DD, MMMM YYYY")}
+            {activeSub?.createdAt &&
+              dayjs(activeSub.createdAt).format("dddd DD, MMMM YYYY")}
           </p>
         </div>
         <div className="flex border-b pb-2">
           <p className="fw-500 w-3/12">Duration:</p>
-          <p className="fw-500 syne">{subData && `${subData.duration} Months`}</p>
+          <p className="fw-500 syne">
+            {subData
+              ? subData.name === "Free Plan"
+                ? "Unlimited"
+                : `${subData?.duration} Months`
+              : ""}
+          </p>
         </div>
         <div className="flex border-b pb-2">
           <p className="fw-500 w-3/12">Access:</p>

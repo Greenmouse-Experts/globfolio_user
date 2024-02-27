@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import google from "@/lib/assets/images/google.png";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import { useMutation } from "@tanstack/react-query";
 import { googleSignup } from "@/lib/service/api/authApi";
 import { toast } from "react-toastify";
 import useAuth from "@/lib/hooks/authUser";
 import { useRouter } from "next/navigation";
 import useRoutine from "@/lib/hooks/useRoutine";
+import { BarsSpinner } from "../../ui/Loaders/Spinners";
 
 const GoogleSignUp = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -19,15 +20,12 @@ const GoogleSignUp = () => {
     mutationKey: ["googleRegister"],
   });
   const handleRegister = (data: any) => {
-    console.log(data);
-
+    setIsBusy(true)
     const payload = {
       access_token: data.access_token,
     };
     signUp.mutate(payload, {
       onSuccess: (data) => {
-        console.log(data);
-
         toast.success("Login Successful");
         setIsBusy(false);
         localStorage.setItem("glob_token", data.data.access_token);
@@ -45,12 +43,13 @@ const GoogleSignUp = () => {
           account: "",
           username: data.data.userName
         });
-        saveSub(data.data.subscription)
+        saveSub({
+          ...data.data.Subscription,
+          planId: data.data.Subscription.id,
+        })
         router.push("/dashboard");
       },
       onError: (error: any) => {
-        console.log(error);
-
         toast.error(error?.response?.data?.message);
         setIsBusy(false);
       },
@@ -68,10 +67,11 @@ const GoogleSignUp = () => {
         className="w-full border cursor-pointer border-gray-400 py-2 rounded-[30px] flex justify-center"
         onClick={() => registerUser()}
       >
-        <div className="flex items-center gap-x-3">
+       {!isBusy && <div className="flex items-center gap-x-3">
           <Image src={google} alt="logo" width={35} height={35} />
           <p className="whitespace-nowrap fw-500">Sign up with Google</p>
-        </div>
+        </div>}
+        {isBusy &&  <BarsSpinner size={"17"} color="#111827" />}
       </div>
     </>
   );

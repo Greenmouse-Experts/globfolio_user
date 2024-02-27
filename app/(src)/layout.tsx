@@ -36,7 +36,7 @@ export default function RootLayout({
         />
         <ThemeProvider>
           <ChakraProvider>
-            <GoogleOAuthProvider clientId="667264856835-23uvuo0emquooagvu2cgp40vf66oao7d.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId='667264856835-eh7g0tcgq7mrpnrekok006q0kcglskfp.apps.googleusercontent.com'>
               <main>{children}</main>
             </GoogleOAuthProvider>
           </ChakraProvider>

@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { toast } from "react-toastify";
-import useAuth from "../../../hooks/authUser";
 import { useRouter } from "next/navigation";
 import Button from "../../ui/Button";
+import useAuthStore from "@/lib/store/userStore";
 
 interface Props {
   CloseModal: () => void;
@@ -10,9 +10,10 @@ interface Props {
 
 const LogoutModal: FC<Props> = ({ CloseModal }) => {
   const navigate = useRouter();
-  const {signOut} = useAuth()
+  const clearUser = useAuthStore((state) => state.clearUser);
   const logoutUser = () => {
-    signOut();
+    localStorage.clear();
+    clearUser();
     toast.success("Logout Successful");
     navigate.push("/auth/login");
   };
