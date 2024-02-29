@@ -30,17 +30,7 @@ const PicksDetails = () => {
         )}
         {data && !isLoading && (
           <div className="py-2">
-            <Image
-              className="w-full lg:w-48 lg:h-48 lg:float-left mr-6 mb-6"
-              src={
-                data?.data?.image
-                  ? data?.data?.image
-                  : "https://res.cloudinary.com/greenmouse-tech/image/upload/v1708002768/globfolio/images_1_k8nwgw.jpg"
-              }
-              alt="pick-img"
-              width={400}
-              height={400}
-            />
+            
             <div className="item-body px-2 text-wrap">
               <p className="fs-300 mb-2 fw-500">
                 {dayjs(data?.data?.createdAt).format("dddd DD, MMMM YYYY")}
