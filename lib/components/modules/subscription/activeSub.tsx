@@ -14,10 +14,11 @@ const ActiveSub = () => {
     queryKey: ["sinfetchsub"],
   });
   useEffect(() => {
-      setTimeout(() => {
-        refetch();
-      }, 4000);
-  }, []);
+    refetch();
+    setTimeout(() => {
+      refetch();
+    }, 4000);
+  }, [activeSub]);
 
   return (
     <div className="bg-white shadow p-3">
@@ -43,17 +44,19 @@ const ActiveSub = () => {
             </div>
             <div className="mt-1 flex gap-x-3 items-center">
               <p className="fw-500 fs-400">Expires At: </p>
-              <p>{activeSub?.expiredAt === null ? "Unlimited" : "30 Sep 2024"}</p>
+              <p>
+                {activeSub?.expiredAt === null ? "Unlimited" : "30 Sep 2024"}
+              </p>
             </div>
             <div className="grid gap-3 mt-2">
-            {
-               data?.data?.benefits?.map((item:BenefitSubItem, i:number) => (
+              {data?.data?.benefits?.map((item: BenefitSubItem, i: number) => (
                 <div className="flex gap-x-3" key={i}>
-                    <p className="mt-2"><FaCircleCheck className="text-sm text-green-600 shrink-0"/></p>
-                    <p className="fs-400">{item.benefit}</p>
+                  <p className="mt-2">
+                    <FaCircleCheck className="text-sm text-green-600 shrink-0" />
+                  </p>
+                  <p className="fs-400">{item.benefit}</p>
                 </div>
-               )) 
-            }
+              ))}
             </div>
           </div>
         )}

@@ -93,7 +93,7 @@ const PicksList = () => {
                   <TimelineItem className="lg:h-28 mb-4 lg:mb-0" key={i}>
                     <TimelineConnector className="!w-[78px]" />
                     <TimelineHeader
-                      className="relative rounded-xl border border-blue-gray-50 bg-white py-3 pl-4 pr-8 shadow-lg shadow-blue-gray-900/5"
+                      className="relative rounded-xl border border-blue-gray-50 bg-white py-3 pl-4 pr-8 shadow-lg shadow-blue-gray-900/5 cursor-pointer"
                       onClick={() => route.push(`/picks/details/${item.id}`)}
                     >
                       <TimelineIcon className="p-3" variant="ghost">
