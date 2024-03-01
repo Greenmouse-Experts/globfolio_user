@@ -27,19 +27,19 @@ export default function TopGroupsChart() {
     queryFn: fetchAllSubs,
     queryKey: ["fetchAllSubs"],
   });
-  const currSub = subs?.data?.filter((where:SubItemType) => where.id === activeSub.planId)
-  const globalSub = subs?.data?.filter((where:SubItemType) => where.name === 'Global Plan')
+  const currSub = subs?.data?.filter((where:SubItemType) => where?.id === activeSub.planId)
+  const globalSub = subs?.data?.filter((where:SubItemType) => where?.name === 'Global Plan')
   // console.log('curr sub', groups && JSON.parse(groups?.data[0].access));
   const checkAccess = (item:ChatRoomItemType) => {
-    const accss = JSON.parse(item.access)
+    const accss = JSON.parse(item?.access)
     if(!currSub){
       return '';
     }
-    if(currSub[0].name === 'Global Plan'){
+    if(currSub[0]?.name === 'Global Plan'){
       return <p className="px-4 rounded-lg text-green-600 border border-green-6 fs-400 fw-60000">Accessible</p>
     }
    if(!!accss?.length){
-    if(currSub[0].chatAccess.every((item:any) => accss.includes(item))){
+    if(currSub[0]?.chatAccess?.every((item:any) => accss.includes(item))){
       return <p className="px-4 rounded-lg text-green-600 border border-green-6 fs-400 fw-60000">Accessible</p>
     }else {
       return <p className="px-4 rounded-lg text-red-600 border border-red-600 fs-400 fw-600">Blocked</p>
@@ -51,7 +51,7 @@ export default function TopGroupsChart() {
     if(!subs){
       return '';
     }
-    const filtered = subs.data.filter((array:SubItemType) => accss.some((element:any) => array.analystPickAccess.includes(element)))
+    const filtered = subs?.data?.filter((array:SubItemType) => accss.some((element:any) => array?.analystPickAccess?.includes(element)))
     return filtered
   }
   return (
@@ -120,14 +120,14 @@ export default function TopGroupsChart() {
                     </div>
                   </td>
                   <td>
-                    <div className="flex gap-2">
-                    {checkSub(item)?.map((item:SubItemType) => (
+                    <div className="flex gap-2 w-[200px">
+                    {!!checkSub(item)?.length && checkSub(item)?.map((item:SubItemType) => (
                       <div className="bg-primary px-3 text-white rounded-lg shadow">
-                        {item.name}
+                        {item?.name}
                       </div>
                     ))}
                     <div className="bg-primary px-3 text-white rounded-lg shadow">
-                      {globalSub && globalSub[0].name}
+                      {globalSub && !!globalSub?.length && globalSub[0]?.name}
                     </div>
                     </div>
                   </td>
