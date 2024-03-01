@@ -121,7 +121,7 @@ export default function TopGroupsChart() {
                   </td>
                   <td>
                     <div className="flex gap-2">
-                    {checkSub(item).map((item:SubItemType) => (
+                    {checkSub(item)?.map((item:SubItemType) => (
                       <div className="bg-primary px-3 text-white rounded-lg shadow">
                         {item.name}
                       </div>
