@@ -22,6 +22,8 @@ import { FaHeart } from "react-icons/fa6";
 import useAuth from "@/lib/hooks/authUser";
 import { useMutation } from "@tanstack/react-query";
 import EmptyGif from "../../ui/EmptyState/EmptyGif";
+import useModal from "@/lib/hooks/useModal";
+import ListDetail from "./ListDetail";
 const lookup = require("country-code-lookup");
 
 const PicksList = () => {
@@ -70,6 +72,12 @@ const PicksList = () => {
       },
     });
   };
+  const {Modal, setShowModal} = useModal()
+  const [selected, setSelected] = useState<any>()
+  const openSelected = (item:any) => {
+    setSelected(item)
+    setShowModal(true)
+  }
   return (
     <>
       <div>
@@ -94,7 +102,7 @@ const PicksList = () => {
                     <TimelineConnector className="!w-[78px]" />
                     <TimelineHeader
                       className="relative rounded-xl border border-blue-gray-50 bg-white py-3 pl-4 pr-8 shadow-lg shadow-blue-gray-900/5 cursor-pointer"
-                      onClick={() => route.push(`/picks/details/${item.id}`)}
+                      onClick={() => openSelected(item)}
                     >
                       <TimelineIcon className="p-3" variant="ghost">
                         <div className="w-6 h-6 place-center">
@@ -171,6 +179,9 @@ const PicksList = () => {
           </div>
         )}
       </div>
+      <Modal title="" size="lg" type="">
+        <ListDetail data={selected} close={() => setShowModal(false)}/>
+      </Modal>
     </>
   );
 };
