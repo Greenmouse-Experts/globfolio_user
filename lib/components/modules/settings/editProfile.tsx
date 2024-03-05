@@ -29,7 +29,7 @@ const EditProfile:FC<Props> = ({close}) => {
     defaultValues: {
       phone_no: user.phone || "",
       gender: user.gender || "",
-    //   username: user.username || "",
+      username: user.username || "",
       country: user.country || "",
       firstname: firstName ||  "",
       lastname: lastName || "",
@@ -44,7 +44,8 @@ const EditProfile:FC<Props> = ({close}) => {
         phone: data.data.phone_no,
         country: data.data.country,
         name: data.data.fullname,
-        gender: data.data.gender
+        gender: data.data.gender,
+        username: data?.data?.username
       })
       setIsBusy(false);
       close();
@@ -60,7 +61,8 @@ const EditProfile:FC<Props> = ({close}) => {
       fullname: `${data.firstname} ${data.lastname}`,
       country: data?.country,
       phone_no: data?.phone_no,
-      gender: data?.gender
+      gender: data?.gender,
+      username: data?.username
     }
     mutation.mutate(payload);
   };
@@ -109,7 +111,7 @@ const EditProfile:FC<Props> = ({close}) => {
                 />
               )}
             />
-            {/* <Controller
+            <Controller
               name="username"
               control={control}
               rules={{
@@ -128,8 +130,8 @@ const EditProfile:FC<Props> = ({close}) => {
                   ref={null}
                 />
               )}
-            /> */}
-            <div className="">
+            />
+            <div className="lg:mt-4">
               <label className="mb-1 block  fw-500 text-[#000000B2]">
                 Phone Number
               </label>

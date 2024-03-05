@@ -6,6 +6,7 @@ import { fetchSingleSubs } from "@/lib/service/api/subApi";
 import { FaAward, FaCircleCheck } from "react-icons/fa6";
 import { formatAsNgnMoney } from "@/lib/utils";
 import { BenefitSubItem } from "@/lib/contracts/subs";
+import dayjs from "dayjs";
 
 const ActiveSub = () => {
   const { activeSub } = useRoutine();
@@ -45,7 +46,7 @@ const ActiveSub = () => {
             <div className="mt-1 flex gap-x-3 items-center">
               <p className="fw-500 fs-400">Expires At: </p>
               <p>
-                {activeSub?.expiredAt === null ? "Unlimited" : "30 Sep 2024"}
+                {activeSub?.expiredAt === null ? "Unlimited" : dayjs(activeSub?.expiredAt).format('DD MMMM YYYY')}
               </p>
             </div>
             <div className="grid gap-3 mt-2">

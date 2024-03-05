@@ -18,8 +18,8 @@ const ViewUsersModal: FC<Props> = ({ id, select, close }) => {
   const selectUser = (item: ChatRoomMemberList) => {
     const payload = {
       id: item.user.id,
-      fullname: item.user.fullname,
-      img: item.user.picture,
+      fullname: item.user.username || 'Anonymous',
+      img: item.user.picture && item.user.picture?.secure_url,
       access: null
     };
     select(payload);
@@ -37,7 +37,7 @@ const ViewUsersModal: FC<Props> = ({ id, select, close }) => {
           <div className="shadow p-2 flex justify-between" key={item.id}>
             <div>
               <div>
-                <p>{item?.user?.fullname}</p>
+                <p>{item?.user?.username || 'Anonymous'}</p>
               </div>
               <div>
                 <p>

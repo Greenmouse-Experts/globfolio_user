@@ -20,6 +20,7 @@ const MessagingUi: FC<Props> = ({ socket, item, select }) => {
         {
           sender: data.msg.afrom.id,
           owner: data.msg.afrom.fullname,
+          username: data.msg.afrom.username,
           message: data.msg.message,
           createdAt: data.msg.createdAt,
           id: data.msg.id,
