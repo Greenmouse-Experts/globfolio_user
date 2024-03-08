@@ -41,7 +41,7 @@ const GoogleSignUp = () => {
           email_verify: data.data.email_verify,
           id: data.data.id,
           account: "",
-          username: data.data.userName
+          username: data.data.username
         });
         saveSub({
           ...data.data.Subscription,
