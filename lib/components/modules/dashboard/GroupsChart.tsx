@@ -9,12 +9,9 @@ import { ChatRoomItemType } from "@/lib/contracts/chat";
 import { SubItemType } from "@/lib/contracts/subs";
 import useRoutine from "@/lib/hooks/useRoutine";
 import { getGroups } from "@/lib/service/api/chatApi";
-import { getChart } from "@/lib/service/api/routineApi";
 import { fetchAllSubs } from "@/lib/service/api/subApi";
 import { useQuery } from "@tanstack/react-query";
-import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { BsStack } from "react-icons/bs";
 
 export default function TopGroupsChart() {
@@ -90,15 +87,15 @@ export default function TopGroupsChart() {
               <tr className="shadow">
                 <th className="text-left p-2">Groups</th>
                 <th className="text-left p-2">Access</th>
-                <th className="text-left p-2">Subscription Required</th>
+                <th className="text-left p-2 whitespace-nowrap">Subscription Required</th>
               </tr>
             </thead>
             <tbody>
               {groups && groups?.data.map((item: ChatRoomItemType) => (
                 <tr>
-                  <td className="p-2">
+                  <td className="p-2 min-w-[200px] whitespace-nowrap">
                     <div className="flex items-center gap-4">
-                      <div className="border-[5px] border-gray-300 ">
+                      <div className="border-[5px] shrink-0 border-gray-300 ">
                         <Image
                           src={item.banner}
                           alt="banner"
@@ -112,7 +109,7 @@ export default function TopGroupsChart() {
                       </div>
                     </div>
                   </td>
-                  <td>
+                  <td className="min-w-[120px] whitespace-nowrap">
                     <div className="flex">
                     {
                       checkAccess(item)
@@ -120,7 +117,7 @@ export default function TopGroupsChart() {
                     </div>
                   </td>
                   <td>
-                    <div className="flex gap-2 w-[200px">
+                    <div className="flex gap-2">
                     {!!checkSub(item)?.length && checkSub(item)?.map((item:SubItemType) => (
                       <div className="bg-primary px-3 text-white rounded-lg shadow">
                         {item?.name}
