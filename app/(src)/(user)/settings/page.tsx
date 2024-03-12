@@ -98,12 +98,12 @@ const SettingsPage = () => {
               </p>
               <p className="lg:text-xl syne">{user.name}</p>
             </div>
-            {/* <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
+            <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
               <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
                 User Name:
               </p>
               <p className="lg:text-xl syne">{user.username}</p>
-            </div> */}
+            </div>
             <div className="flex items-center gap-x-4 py-3 border-b border-gray-300">
               <p className="w-3/12 lg:w-4/12 shrink-0 text-lg lg:text-2xl syne">
                 Email:

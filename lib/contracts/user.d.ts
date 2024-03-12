@@ -19,7 +19,7 @@ export interface UserItemType {
   password: string;
   password_token: string | null;
   phone_no: string;
-  picture: string | null;
+  picture: any;
   planId: string;
   reason_for_suspension: string | null;
   referralId: string;

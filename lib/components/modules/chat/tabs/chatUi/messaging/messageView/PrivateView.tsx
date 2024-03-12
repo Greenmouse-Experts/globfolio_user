@@ -42,6 +42,7 @@ const PrivateView: FC<Props> = ({ socket, roomId, respond }) => {
           ({ afrom, message, createdAt, id, files, areplyTo }: any) => ({
             sender: afrom.id,
             owner: afrom.fullname,
+            username: afrom.username,
             message,
             createdAt,
             id,
@@ -128,7 +129,7 @@ const PrivateView: FC<Props> = ({ socket, roomId, respond }) => {
                     id={item.id}
                   >
                     <div className="flex items-center justify-between">
-                      <p className="fw-600 fs-200 mb-1">{item.owner}</p>
+                      <p className="fw-600 fs-200 mb-1">{item.username || "Anonymous"}</p>
                       <div>
                         <Menu>
                           <MenuHandler>

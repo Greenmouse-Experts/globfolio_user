@@ -51,15 +51,15 @@ const WelcomeBox = () => {
         </div>
       </div>
       <div className="pt-4 grid gap-4">
-        <div className="flex border-b pb-2">
-          <p className="fw-500 w-3/12">Start Date:</p>
+        <div className="flex gap-x-2 border-b pb-2">
+          <p className="fw-500 lg:w-3/12 whitespace-nowrap">Start Date:</p>
           <p className="fw-500 syne">
             {activeSub?.createdAt &&
               dayjs(activeSub.createdAt).format("dddd DD, MMMM YYYY")}
           </p>
         </div>
         <div className="flex border-b pb-2">
-          <p className="fw-500 w-3/12">Duration:</p>
+          <p className="fw-500 lg:w-3/12">Duration:</p>
           <p className="fw-500 syne">
             {subData
               ? subData.name === "Free Plan"
@@ -69,7 +69,7 @@ const WelcomeBox = () => {
           </p>
         </div>
         <div className="flex border-b pb-2">
-          <p className="fw-500 w-3/12">Access:</p>
+          <p className="fw-500 lg:w-3/12">Access:</p>
           <div className="flex gap-4">
             {subData?.analystPickAccess.map((item: string, i: number) => (
               <p

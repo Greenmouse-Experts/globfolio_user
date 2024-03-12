@@ -46,6 +46,7 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
           ({
             sender,
             owner,
+            username,
             message,
             createdAt,
             id,
@@ -54,6 +55,7 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
           }: any) => ({
             sender,
             owner: owner.fullname,
+            username: owner.username,
             message,
             createdAt,
             id,
@@ -66,6 +68,7 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
         const add = {
           sender: data.msg.sender,
           owner: data.msg.owner.fullname,
+          username: data.msg.owner.username,
           message: data.msg.message,
           createdAt: data.msg.createdAt,
           id: data.msg.id,
@@ -161,7 +164,7 @@ const GroupView: FC<Props> = ({ socket, roomId, respond }) => {
                   id={item.id}
                 >
                   <div className="flex items-center justify-between">
-                    <p className="fw-600 fs-200 mb-1">{item.owner}</p>
+                    <p className="fw-600 fs-200 mb-1">{item.username? item.username : 'Anonymous'}</p>
                     <div>
                       <Menu>
                         <MenuHandler>

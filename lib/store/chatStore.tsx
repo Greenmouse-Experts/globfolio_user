@@ -10,6 +10,7 @@ interface ChatState {
 interface chatProps {
   sender: any;
   owner: string;
+  username: string;
   message: string;
   createdAt: string;
   id: string;

@@ -9,12 +9,9 @@ import { ChatRoomItemType } from "@/lib/contracts/chat";
 import { SubItemType } from "@/lib/contracts/subs";
 import useRoutine from "@/lib/hooks/useRoutine";
 import { getGroups } from "@/lib/service/api/chatApi";
-import { getChart } from "@/lib/service/api/routineApi";
 import { fetchAllSubs } from "@/lib/service/api/subApi";
 import { useQuery } from "@tanstack/react-query";
-import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { BsStack } from "react-icons/bs";
 
 export default function TopGroupsChart() {
@@ -27,19 +24,19 @@ export default function TopGroupsChart() {
     queryFn: fetchAllSubs,
     queryKey: ["fetchAllSubs"],
   });
-  const currSub = subs?.data?.filter((where:SubItemType) => where.id === activeSub.planId)
-  const globalSub = subs?.data?.filter((where:SubItemType) => where.name === 'Global Plan')
+  const currSub = subs?.data?.filter((where:SubItemType) => where?.id === activeSub.planId)
+  const globalSub = subs?.data?.filter((where:SubItemType) => where?.name === 'Global Plan')
   // console.log('curr sub', groups && JSON.parse(groups?.data[0].access));
   const checkAccess = (item:ChatRoomItemType) => {
-    const accss = JSON.parse(item.access)
+    const accss = JSON.parse(item?.access)
     if(!currSub){
       return '';
     }
-    if(currSub[0].name === 'Global Plan'){
+    if(currSub[0]?.name === 'Global Plan'){
       return <p className="px-4 rounded-lg text-green-600 border border-green-6 fs-400 fw-60000">Accessible</p>
     }
    if(!!accss?.length){
-    if(currSub[0].chatAccess.every((item:any) => accss.includes(item))){
+    if(currSub[0]?.chatAccess?.every((item:any) => accss.includes(item))){
       return <p className="px-4 rounded-lg text-green-600 border border-green-6 fs-400 fw-60000">Accessible</p>
     }else {
       return <p className="px-4 rounded-lg text-red-600 border border-red-600 fs-400 fw-600">Blocked</p>
@@ -51,7 +48,7 @@ export default function TopGroupsChart() {
     if(!subs){
       return '';
     }
-    const filtered = subs.data.filter((array:SubItemType) => accss.some((element:any) => array.analystPickAccess.includes(element)))
+    const filtered = subs?.data?.filter((array:SubItemType) => accss.some((element:any) => array?.analystPickAccess?.includes(element)))
     return filtered
   }
   return (
@@ -90,15 +87,15 @@ export default function TopGroupsChart() {
               <tr className="shadow">
                 <th className="text-left p-2">Groups</th>
                 <th className="text-left p-2">Access</th>
-                <th className="text-left p-2">Subscription Required</th>
+                <th className="text-left p-2 whitespace-nowrap">Subscription Required</th>
               </tr>
             </thead>
             <tbody>
               {groups && groups?.data.map((item: ChatRoomItemType) => (
                 <tr>
-                  <td className="p-2">
+                  <td className="p-2 min-w-[200px] whitespace-nowrap">
                     <div className="flex items-center gap-4">
-                      <div className="border-[5px] border-gray-300 ">
+                      <div className="border-[5px] shrink-0 border-gray-300 ">
                         <Image
                           src={item.banner}
                           alt="banner"
@@ -112,7 +109,7 @@ export default function TopGroupsChart() {
                       </div>
                     </div>
                   </td>
-                  <td>
+                  <td className="min-w-[120px] whitespace-nowrap">
                     <div className="flex">
                     {
                       checkAccess(item)
@@ -121,13 +118,13 @@ export default function TopGroupsChart() {
                   </td>
                   <td>
                     <div className="flex gap-2">
-                    {checkSub(item).map((item:SubItemType) => (
+                    {!!checkSub(item)?.length && checkSub(item)?.map((item:SubItemType) => (
                       <div className="bg-primary px-3 text-white rounded-lg shadow">
-                        {item.name}
+                        {item?.name}
                       </div>
                     ))}
                     <div className="bg-primary px-3 text-white rounded-lg shadow">
-                      {globalSub && globalSub[0].name}
+                      {globalSub && !!globalSub?.length && globalSub[0]?.name}
                     </div>
                     </div>
                   </td>

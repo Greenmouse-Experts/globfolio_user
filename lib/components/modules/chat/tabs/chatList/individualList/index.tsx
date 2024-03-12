@@ -24,7 +24,7 @@ const IndividualList: FC<Props> = ({ select, item }) => {
               className={`flex w-[180px] border lg:border-0  shrink-0 lg:w-auto gap-x-1 cursor-pointer hover:bg-gray-200 rounded-md p-2 ${item?.name === items?.scontact?.fullname && 'bg-gray-200'}`}
               onClick={() =>
                 select({
-                  fullname: items.scontact.fullname,
+                  fullname: items?.scontact?.username? items?.scontact?.username : "Anonymous",
                   id: items.scontact.id,
                   access: null,
                   img:  items?.scontact?.picture
@@ -46,7 +46,7 @@ const IndividualList: FC<Props> = ({ select, item }) => {
               />
               <div>
                 <p className="fs-200 lg:fs-400 fw-500 ">
-                  {items?.scontact?.fullname}
+                  {items?.scontact?.username || "Anonymous"}
                 </p>
                 <p className="whitespace-nowrap fs-200 text-gray-400">
                   {items?.lastMessage}
