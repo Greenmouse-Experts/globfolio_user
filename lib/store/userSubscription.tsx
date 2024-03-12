@@ -63,7 +63,7 @@ const useSubStore = create<Props>()(
     }),
     {
       name: "glob_user_sub",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );
