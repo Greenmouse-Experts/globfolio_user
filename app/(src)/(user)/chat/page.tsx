@@ -6,8 +6,8 @@ import React, { useState } from 'react'
 import io from 'socket.io-client';
 
 
-// const socket = io('https://server.globfolio.com/');
-const socket = io('https://api.globfolio.com/');
+const socket = io('https://server.globfolio.com/');
+// const socket = io('https://api.globfolio.com/');
 const GroupChat = () => {
   const [activeChat, setActiveChat] = useState<any>()
   const clearChat = useChatStore((state) => state.clearChat)

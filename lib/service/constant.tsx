@@ -1,7 +1,7 @@
-export const BASE_URL = 'https://api.globfolio.com/api'
-export const BASE_UPLOAD = 'https://api.globfolio.com'
-// export const BASE_URL = 'https://server.globfolio.com/api'
-// export const BASE_UPLOAD = 'https://server.globfolio.com'
+// export const BASE_URL = 'https://api.globfolio.com/api'
+// export const BASE_UPLOAD = 'https://api.globfolio.com'
+export const BASE_URL = 'https://server.globfolio.com/api'
+export const BASE_UPLOAD = 'https://server.globfolio.com'
 
 export enum HTTP_METHODS {
     GET = "GET",
