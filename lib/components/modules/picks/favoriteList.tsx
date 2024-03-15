@@ -196,7 +196,7 @@ const FavoriteList = () => {
         )}
       </div>
       <Modal title="" size="lg" type="">
-        <ListDetail data={selected} close={() => setShowModal(false)}/>
+        <ListDetail id={selected?.id} close={() => setShowModal(false)}/>
       </Modal>
     </>
   );
