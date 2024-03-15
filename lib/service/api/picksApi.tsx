@@ -30,6 +30,11 @@ axios.interceptors.response.use(
   }
 );
 
+export const fetchFreePick = async (page: number) => {
+  return axios
+    .get(`${ENDPOINT.GET_FREE_PICKS}?page=${page}`)
+    .then((response) => response.data);
+};
 export const fetchAllPicks = async (page: number) => {
   return axios
     .get(`${ENDPOINT.GET_ALL_PICKS}?page=${page}`)

@@ -8,7 +8,7 @@ import {
   Typography,
   TimelineHeader,
 } from "@/lib/components/ui/TailwindComp";
-import { fetchAllPicks, saveUserPick } from "@/lib/service/api/picksApi";
+import { fetchAllPicks, fetchFreePick} from "@/lib/service/api/picksApi";
 import dayjs from "dayjs";
 import ReactCountryFlag from "react-country-flag";
 import {
@@ -20,27 +20,35 @@ import CubeLoader from "../../ui/Loaders/CubeLoader/CubeLoader";
 import { useRouter } from "next/navigation";
 import { FaHeart } from "react-icons/fa6";
 import useAuth from "@/lib/hooks/authUser";
-import { useMutation } from "@tanstack/react-query";
 import EmptyGif from "../../ui/EmptyState/EmptyGif";
 import useModal from "@/lib/hooks/useModal";
 import ListDetail from "./ListDetail";
+import useRoutine from "@/lib/hooks/useRoutine";
 const lookup = require("country-code-lookup");
 
 const PicksList = () => {
-  const { userId } = useAuth();
+  const {isFree} = useRoutine()
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const route = useRouter();
   const handleFetch = async (page: number) => {
     setIsLoading(true);
     setPage(page);
-    await fetchAllPicks(page)
+    if(isFree()){
+      await fetchFreePick(page)
       .then((data) => {
         setData(data?.data);
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
+    }else{
+      await fetchAllPicks(page)
+      .then((data) => {
+        setData(data?.data);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+    }
   };
   useEffect(() => {
     handleFetch(1);
@@ -54,24 +62,7 @@ const PicksList = () => {
     }
     handleFetch(page - 1);
   };
-  const mutate = useMutation({
-    mutationFn: saveUserPick,
-    mutationKey: ["saveUserPick"],
-  });
-  const addToFavorite = (item: string) => {
-    const payload = {
-      userId: userId,
-      stockId: item,
-    };
-    mutate.mutateAsync(payload, {
-      onSuccess: () => {
-        toast.success("Picks has been added to favorites");
-      },
-      onError: (error: any) => {
-        toast.error(error.response.data.message);
-      },
-    });
-  };
+ 
   const {Modal, setShowModal} = useModal()
   const [selected, setSelected] = useState<any>()
   const openSelected = (item:any) => {
@@ -106,7 +97,7 @@ const PicksList = () => {
                     >
                       <TimelineIcon className="p-3" variant="ghost">
                         <div className="w-6 h-6 place-center">
-                          <ReactCountryFlag
+                         {!isFree()? <ReactCountryFlag
                             countryCode={
                               lookup.byCountry(item.country).internet
                             }
@@ -118,7 +109,17 @@ const PicksList = () => {
                             cdnUrl="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/1x1/"
                             cdnSuffix="svg"
                             title="US"
-                          />
+                          />:  <ReactCountryFlag
+                          countryCode={'NG'}
+                          style={{
+                            width: "2em",
+                            height: "2em",
+                          }}
+                          svg
+                          cdnUrl="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/1x1/"
+                          cdnSuffix="svg"
+                          title="US"
+                        />}
                         </div>
                       </TimelineIcon>
                       <div className="w-full flex relative flex-col gap-1">
@@ -137,15 +138,6 @@ const PicksList = () => {
                         >
                           {dayjs(item.createdAt).format("dddd DD, MM YYYY")}
                         </Typography>
-                        <div onClick={(e) => e.stopPropagation()}>
-                          <div
-                            className="md:absolute cursor-pointer bottom-1 lg:top-2 right-4 flex items-center gap-x-1"
-                            onClick={() => addToFavorite(item.id)}
-                          >
-                            <FaHeart />
-                            <p className="fs-300 fw-600">Add to Favorites</p>
-                          </div>
-                        </div>
                       </div>
                     </TimelineHeader>
                   </TimelineItem>
@@ -180,7 +172,7 @@ const PicksList = () => {
         )}
       </div>
       <Modal title="" size="lg" type="">
-        <ListDetail data={selected} close={() => setShowModal(false)}/>
+        <ListDetail id={selected?.id} close={() => setShowModal(false)}/>
       </Modal>
     </>
   );

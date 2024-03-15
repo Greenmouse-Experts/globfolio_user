@@ -32,7 +32,7 @@ export default function TopGroupsChart() {
     if(!currSub){
       return '';
     }
-    if(currSub[0]?.name === 'Global Plan'){
+    if(currSub[0]?.name === 'Global Plan' || currSub[0]?.name ===  'Hybrid Plan'){
       return <p className="px-4 rounded-lg text-green-600 border border-green-6 fs-400 fw-60000">Accessible</p>
     }
    if(!!accss?.length){

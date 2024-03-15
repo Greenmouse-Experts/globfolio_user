@@ -28,6 +28,12 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const getMe = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_USER}`)
+    .then((response) => response.data);
+};
 export const registerUser = async (payload:any) => {
   return axios
     .post(`${ENDPOINT.REGISTER_USER}`, payload)

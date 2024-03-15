@@ -29,6 +29,7 @@ export interface BenefitSubItem {
 export interface SubItemType {
   amount: number;
   analystPickAccess: string[];
+  chatAccess: string[];
   appleId: string;
   benefits: BenefitSubItem[];
   chatAccess: string[];
