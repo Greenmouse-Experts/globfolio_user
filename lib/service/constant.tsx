@@ -22,6 +22,7 @@ export enum HTTP_METHODS {
   export const UPDATE_AVATAR = `/user/profile/update-pic`
   export const UPDATE_PROFILE = `/user/update-account`
   export const UPDATE_PASSWORD = `/users/change-password`
+  export const GET_USER = `/user/profile`
 
   // subscription
   export const GET_SUBSCRIPTIONS = `/subscription/plans`

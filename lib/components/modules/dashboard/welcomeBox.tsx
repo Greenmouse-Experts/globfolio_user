@@ -1,27 +1,34 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import useAuth from "@/lib/hooks/authUser";
 import { FaAward } from "react-icons/fa";
 import { formatAsNgnMoney } from "@/lib/utils";
 import useRoutine from "@/lib/hooks/useRoutine";
 import { fetchSingleSubs } from "@/lib/service/api/subApi";
 import { SubItemType } from "@/lib/contracts/subs";
-import dayjs from "dayjs";
+const dayjs = require("dayjs");
+const relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
 
-const WelcomeBox = () => {
+interface Props{
+  loading: boolean;
+  id: string
+}
+const WelcomeBox:FC<Props> = ({loading, id}) => {
   const { firstName } = useAuth();
-  const { activeSub } = useRoutine();
+  const { activeSub, saveSubName } = useRoutine();
   const [subData, setSubData] = useState<SubItemType>();
 
   useEffect(() => {
-    if (activeSub?.planId) {
-      fetchSingleSubs(activeSub?.planId)
+    if (id) {
+      fetchSingleSubs(id)
         .then((res) => {
           setSubData(res.data);
+          saveSubName(res.data.name)
         })
         .catch(() => {});
     }
-  }, [activeSub]);
+  }, [id]);
   return (
     <div className="p-3">
       <div className="bg-primary rounded-lg">
@@ -59,19 +66,19 @@ const WelcomeBox = () => {
           </p>
         </div>
         <div className="flex border-b pb-2">
-          <p className="fw-500 lg:w-3/12">Duration:</p>
+          <p className="fw-500 lg:w-3/12">Expires:</p>
           <p className="fw-500 syne">
             {subData
               ? subData.name === "Free Plan"
                 ? "Unlimited"
-                : `${subData?.duration} Months`
+                : `${dayjs(activeSub.expiredAt).fromNow()}`
               : ""}
           </p>
         </div>
         <div className="flex border-b pb-2">
           <p className="fw-500 lg:w-3/12">Access:</p>
           <div className="flex gap-4">
-            {subData?.analystPickAccess.map((item: string, i: number) => (
+            {subData?.chatAccess?.map((item: string, i: number) => (
               <p
                 className="bg-primary fs-500 fw-500 syne px-2 py-1 text-white rounded-lg"
                 key={i}
