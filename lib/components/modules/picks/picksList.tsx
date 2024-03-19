@@ -27,14 +27,14 @@ import useRoutine from "@/lib/hooks/useRoutine";
 const lookup = require("country-code-lookup");
 
 const PicksList = () => {
-  const {isFree} = useRoutine()
+  const {isFree, activeSub} = useRoutine()
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const handleFetch = async (page: number) => {
     setIsLoading(true);
     setPage(page);
-    if(isFree()){
+    if(isFree() || !dayjs().isBefore(activeSub.expiredAt, "day")){
       await fetchFreePick(page)
       .then((data) => {
         setData(data?.data);
@@ -99,7 +99,7 @@ const PicksList = () => {
                         <div className="w-6 h-6 place-center">
                          {!isFree()? <ReactCountryFlag
                             countryCode={
-                              lookup.byCountry(item.country).internet
+                              lookup.byCountry(item.country)?.internet
                             }
                             style={{
                               width: "2em",

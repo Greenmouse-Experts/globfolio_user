@@ -58,26 +58,39 @@ const WelcomeBox:FC<Props> = ({loading, id}) => {
         </div>
       </div>
       <div className="pt-4 grid gap-4">
-        <div className="flex gap-x-2 border-b pb-2">
+        {/* <div className="flex gap-x-2 border-b pb-2">
           <p className="fw-500 lg:w-3/12 whitespace-nowrap">Start Date:</p>
           <p className="fw-500 syne">
             {activeSub?.createdAt &&
               dayjs(activeSub.createdAt).format("dddd DD, MMMM YYYY")}
           </p>
-        </div>
+        </div> */}
         <div className="flex border-b pb-2">
-          <p className="fw-500 lg:w-3/12">Expires:</p>
+          <p className="fw-500 lg:w-3/12">Expiry Date:</p>
           <p className="fw-500 syne">
             {subData
               ? subData.name === "Free Plan"
                 ? "Unlimited"
-                : `${dayjs(activeSub.expiredAt).fromNow()}`
+                : `${dayjs(activeSub.expiredAt).format("dddd, MMMM DD, YYYY")}`
               : ""}
           </p>
         </div>
-        <div className="flex border-b pb-2">
-          <p className="fw-500 lg:w-3/12">Access:</p>
-          <div className="flex gap-4">
+        <div className="flex overflow-x-auto scroll-pro gap-x-2 border-b pb-2">
+          <p className="fw-500 whitespace-nowrap w-[34%] lg:w-3/12">Picks Access:</p>
+          <div className="flex lg:w-7/12 overflow-x-auto scroll-pro gap-4">
+            {subData?.analystPickAccess?.map((item: string, i: number) => (
+              <p
+                className="bg-primary fs-500 fw-500 syne px-2 py-1 text-white rounded-lg"
+                key={i}
+              >
+                {item}
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className="flex gap-x-2 overflow-x-auto scroll-pro border-b pb-2">
+          <p className="fw-500 whitespace-nowrap w-[34%] lg:w-3/12">Chat Access:</p>
+          <div className="flex lg:w-7/12 overflow-x-auto scroll-pro gap-4">
             {subData?.chatAccess?.map((item: string, i: number) => (
               <p
                 className="bg-primary fs-500 fw-500 syne px-2 py-1 text-white rounded-lg"

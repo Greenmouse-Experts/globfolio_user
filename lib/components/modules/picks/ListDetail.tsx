@@ -18,7 +18,7 @@ interface Props {
 }
 const ListDetail: FC<Props> = ({ id, close }) => {
   const { userId } = useAuth();
-  const {isFree} = useRoutine()
+  const {isFree, activeSub} = useRoutine()
   const router = useRouter()
   const {data, isLoading} = useQuery({
     queryKey: ['singlePick'],
@@ -42,7 +42,7 @@ const ListDetail: FC<Props> = ({ id, close }) => {
       },
     });
   };
-  if(isFree()){
+  if(isFree() || !dayjs().isBefore(activeSub.expiredAt, "day")){
     return (
       <div>
         <FaTimes
